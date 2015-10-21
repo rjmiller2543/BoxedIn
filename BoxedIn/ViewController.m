@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [UIColor colorWithRed:(136.0/255.0) green:(184.0/255.0) blue:(157.0/255.0) alpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning {

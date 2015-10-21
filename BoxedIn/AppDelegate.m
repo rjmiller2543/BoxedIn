@@ -17,6 +17,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    UIToolbar *tabBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height * 0.09)];
+    tabBar.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.window addSubview:tabBar];
+    
     return YES;
 }
 
