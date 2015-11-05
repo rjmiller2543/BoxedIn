@@ -1,3 +1,6 @@
 platform :ios, '8.0'
 pod 'Parse'
-pod 'TopTabBarView'
+pod 'SSUIViewMiniMe'
+pod 'MinimalTabBar'
+pod 'FlatUIKit'
+pod 'VBFPopFlatButton'

@@ -8,9 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		0728F68E36D7FD309593C66E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F2DC43E27BC668991726707 /* libPods.a */; };
+		506B2AD61BEA455400F96268 /* create-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AD51BEA455400F96268 /* create-button.png */; };
+		506B2AD91BEBB5A600F96268 /* FriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2AD81BEBB5A600F96268 /* FriendListViewController.m */; };
+		506B2ADD1BEBB5D100F96268 /* InfoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2ADC1BEBB5D100F96268 /* InfoPageViewController.m */; };
+		506B2AE01BEBB5E700F96268 /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2ADF1BEBB5E700F96268 /* GameListViewController.m */; };
+		506B2AE31BEBB5F800F96268 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2AE21BEBB5F800F96268 /* SettingsViewController.m */; };
+		506B2AE61BEBB60300F96268 /* GameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2AE51BEBB60300F96268 /* GameBoardViewController.m */; };
+		506B2AE91BEBB61100F96268 /* FriendPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2AE81BEBB61100F96268 /* FriendPageViewController.m */; };
+		506B2AEC1BEBB62000F96268 /* NewGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2AEB1BEBB62000F96268 /* NewGameViewController.m */; };
+		506B2AEE1BEBB9D300F96268 /* boxedIn-app-icon-75.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AED1BEBB9D300F96268 /* boxedIn-app-icon-75.png */; };
+		506B2AF01BEBBD6C00F96268 /* group-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AEF1BEBBD6C00F96268 /* group-100.png */; };
+		506B2AF21BEBBD8D00F96268 /* about-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AF11BEBBD8D00F96268 /* about-100.png */; };
+		506B2AF41BEBBDC000F96268 /* mind_map-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AF31BEBBDC000F96268 /* mind_map-100.png */; };
+		506B2AF61BEBBE2200F96268 /* play-button-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AF51BEBBE2200F96268 /* play-button-icon.png */; };
+		506B2AF81BEBDB9D00F96268 /* mind_map-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AF71BEBDB9D00F96268 /* mind_map-50@2x.png */; };
+		506B2AFA1BEBDBAF00F96268 /* about-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AF91BEBDBAF00F96268 /* about-50@2x.png */; };
+		506B2AFC1BEBDBBB00F96268 /* group-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AFB1BEBDBBB00F96268 /* group-50@2x.png */; };
+		506B2AFE1BEBDBF900F96268 /* play-button-icon-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AFD1BEBDBF900F96268 /* play-button-icon-50@2x.png */; };
+		506B2B001BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AFF1BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png */; };
+		506B2B021BEBDCC200F96268 /* group-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B011BEBDCC200F96268 /* group-32.png */; };
+		506B2B041BEBDCDA00F96268 /* mind_map-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B031BEBDCDA00F96268 /* mind_map-32.png */; };
+		506B2B061BEBDCE500F96268 /* about-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B051BEBDCE500F96268 /* about-32.png */; };
+		506B2B081BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B071BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png */; };
+		506B2B0E1BEBEC1000F96268 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B0C1BEBEC1000F96268 /* ViewController.m */; };
+		506B2B0F1BEBEC1000F96268 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B0D1BEBEC1000F96268 /* ViewController.xib */; };
+		506B2B111BEBEDE200F96268 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B101BEBEDE200F96268 /* MainWindow.xib */; };
+		50C23C0B1BE9A589009E40BC /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0A1BE9A589009E40BC /* play-button.png */; };
+		50C23C0D1BE9A595009E40BC /* friends-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0C1BE9A595009E40BC /* friends-button.png */; };
+		50C23C0F1BE9A5A0009E40BC /* settings-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0E1BE9A5A0009E40BC /* settings-button.png */; };
+		50E682441BE79990001EDFBA /* boxedIn-icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682431BE79990001EDFBA /* boxedIn-icon-1024.png */; };
+		50E682461BE79E03001EDFBA /* boxedIn-app-icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */; };
+		50E682491BE79EC6001EDFBA /* boxedIn-app-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */; };
+		50E6824A1BE79EC6001EDFBA /* boxedIn-app-icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */; };
 		50ECC29A1BD51E5F00A6E9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ECC2991BD51E5F00A6E9F3 /* main.m */; };
 		50ECC29D1BD51E5F00A6E9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ECC29C1BD51E5F00A6E9F3 /* AppDelegate.m */; };
-		50ECC2A01BD51E5F00A6E9F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ECC29F1BD51E5F00A6E9F3 /* ViewController.m */; };
 		50ECC2A31BD51E5F00A6E9F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50ECC2A11BD51E5F00A6E9F3 /* Main.storyboard */; };
 		50ECC2A51BD51E5F00A6E9F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50ECC2A41BD51E5F00A6E9F3 /* Images.xcassets */; };
 		50ECC2A81BD51E5F00A6E9F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50ECC2A61BD51E5F00A6E9F3 /* LaunchScreen.xib */; };
@@ -29,13 +60,51 @@
 
 /* Begin PBXFileReference section */
 		0444D99D7AF0FA727301C6DB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		506B2AD51BEA455400F96268 /* create-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create-button.png"; sourceTree = "<group>"; };
+		506B2AD71BEBB5A600F96268 /* FriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListViewController.h; sourceTree = "<group>"; };
+		506B2AD81BEBB5A600F96268 /* FriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListViewController.m; sourceTree = "<group>"; };
+		506B2ADB1BEBB5D100F96268 /* InfoPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPageViewController.h; sourceTree = "<group>"; };
+		506B2ADC1BEBB5D100F96268 /* InfoPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPageViewController.m; sourceTree = "<group>"; };
+		506B2ADE1BEBB5E700F96268 /* GameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListViewController.h; sourceTree = "<group>"; };
+		506B2ADF1BEBB5E700F96268 /* GameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListViewController.m; sourceTree = "<group>"; };
+		506B2AE11BEBB5F800F96268 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		506B2AE21BEBB5F800F96268 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		506B2AE41BEBB60300F96268 /* GameBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardViewController.h; sourceTree = "<group>"; };
+		506B2AE51BEBB60300F96268 /* GameBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoardViewController.m; sourceTree = "<group>"; };
+		506B2AE71BEBB61100F96268 /* FriendPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendPageViewController.h; sourceTree = "<group>"; };
+		506B2AE81BEBB61100F96268 /* FriendPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendPageViewController.m; sourceTree = "<group>"; };
+		506B2AEA1BEBB62000F96268 /* NewGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameViewController.h; sourceTree = "<group>"; };
+		506B2AEB1BEBB62000F96268 /* NewGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameViewController.m; sourceTree = "<group>"; };
+		506B2AED1BEBB9D300F96268 /* boxedIn-app-icon-75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-75.png"; sourceTree = "<group>"; };
+		506B2AEF1BEBBD6C00F96268 /* group-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group-100.png"; sourceTree = "<group>"; };
+		506B2AF11BEBBD8D00F96268 /* about-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-100.png"; sourceTree = "<group>"; };
+		506B2AF31BEBBDC000F96268 /* mind_map-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mind_map-100.png"; sourceTree = "<group>"; };
+		506B2AF51BEBBE2200F96268 /* play-button-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button-icon.png"; sourceTree = "<group>"; };
+		506B2AF71BEBDB9D00F96268 /* mind_map-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mind_map-50@2x.png"; sourceTree = "<group>"; };
+		506B2AF91BEBDBAF00F96268 /* about-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-50@2x.png"; sourceTree = "<group>"; };
+		506B2AFB1BEBDBBB00F96268 /* group-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group-50@2x.png"; sourceTree = "<group>"; };
+		506B2AFD1BEBDBF900F96268 /* play-button-icon-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button-icon-50@2x.png"; sourceTree = "<group>"; };
+		506B2AFF1BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-50@2x.png"; sourceTree = "<group>"; };
+		506B2B011BEBDCC200F96268 /* group-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group-32.png"; sourceTree = "<group>"; };
+		506B2B031BEBDCDA00F96268 /* mind_map-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mind_map-32.png"; sourceTree = "<group>"; };
+		506B2B051BEBDCE500F96268 /* about-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-32.png"; sourceTree = "<group>"; };
+		506B2B071BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-icon-50-with-alpha@2x.png"; sourceTree = "<group>"; };
+		506B2B0B1BEBEC1000F96268 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		506B2B0C1BEBEC1000F96268 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		506B2B0D1BEBEC1000F96268 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		506B2B101BEBEDE200F96268 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		50C23C0A1BE9A589009E40BC /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
+		50C23C0C1BE9A595009E40BC /* friends-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends-button.png"; sourceTree = "<group>"; };
+		50C23C0E1BE9A5A0009E40BC /* settings-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button.png"; sourceTree = "<group>"; };
+		50E682431BE79990001EDFBA /* boxedIn-icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-icon-1024.png"; sourceTree = "<group>"; };
+		50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-1024.png"; sourceTree = "<group>"; };
+		50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-120.png"; sourceTree = "<group>"; };
+		50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-180.png"; sourceTree = "<group>"; };
 		50ECC2941BD51E5F00A6E9F3 /* BoxedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ECC2981BD51E5F00A6E9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50ECC2991BD51E5F00A6E9F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50ECC29B1BD51E5F00A6E9F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		50ECC29C1BD51E5F00A6E9F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		50ECC29E1BD51E5F00A6E9F3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		50ECC29F1BD51E5F00A6E9F3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		50ECC2A21BD51E5F00A6E9F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50ECC2A41BD51E5F00A6E9F3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		50ECC2A71BD51E5F00A6E9F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -66,6 +135,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		506B2ADA1BEBB5B600F96268 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				506B2AD71BEBB5A600F96268 /* FriendListViewController.h */,
+				506B2AD81BEBB5A600F96268 /* FriendListViewController.m */,
+				506B2ADB1BEBB5D100F96268 /* InfoPageViewController.h */,
+				506B2ADC1BEBB5D100F96268 /* InfoPageViewController.m */,
+				506B2ADE1BEBB5E700F96268 /* GameListViewController.h */,
+				506B2ADF1BEBB5E700F96268 /* GameListViewController.m */,
+				506B2AE11BEBB5F800F96268 /* SettingsViewController.h */,
+				506B2AE21BEBB5F800F96268 /* SettingsViewController.m */,
+				506B2AE41BEBB60300F96268 /* GameBoardViewController.h */,
+				506B2AE51BEBB60300F96268 /* GameBoardViewController.m */,
+				506B2AE71BEBB61100F96268 /* FriendPageViewController.h */,
+				506B2AE81BEBB61100F96268 /* FriendPageViewController.m */,
+				506B2AEA1BEBB62000F96268 /* NewGameViewController.h */,
+				506B2AEB1BEBB62000F96268 /* NewGameViewController.m */,
+				506B2B0B1BEBEC1000F96268 /* ViewController.h */,
+				506B2B0C1BEBEC1000F96268 /* ViewController.m */,
+				506B2B0D1BEBEC1000F96268 /* ViewController.xib */,
+				506B2B101BEBEDE200F96268 /* MainWindow.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		50ECC28B1BD51E5F00A6E9F3 = {
 			isa = PBXGroup;
 			children = (
@@ -91,8 +185,7 @@
 			children = (
 				50ECC29B1BD51E5F00A6E9F3 /* AppDelegate.h */,
 				50ECC29C1BD51E5F00A6E9F3 /* AppDelegate.m */,
-				50ECC29E1BD51E5F00A6E9F3 /* ViewController.h */,
-				50ECC29F1BD51E5F00A6E9F3 /* ViewController.m */,
+				506B2ADA1BEBB5B600F96268 /* View Controllers */,
 				50ECC2A11BD51E5F00A6E9F3 /* Main.storyboard */,
 				50ECC2A41BD51E5F00A6E9F3 /* Images.xcassets */,
 				50ECC2A61BD51E5F00A6E9F3 /* LaunchScreen.xib */,
@@ -104,6 +197,28 @@
 		50ECC2971BD51E5F00A6E9F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				506B2B071BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png */,
+				506B2B051BEBDCE500F96268 /* about-32.png */,
+				506B2B031BEBDCDA00F96268 /* mind_map-32.png */,
+				506B2B011BEBDCC200F96268 /* group-32.png */,
+				506B2AFD1BEBDBF900F96268 /* play-button-icon-50@2x.png */,
+				506B2AFB1BEBDBBB00F96268 /* group-50@2x.png */,
+				506B2AF91BEBDBAF00F96268 /* about-50@2x.png */,
+				506B2AF71BEBDB9D00F96268 /* mind_map-50@2x.png */,
+				506B2AF51BEBBE2200F96268 /* play-button-icon.png */,
+				506B2AF31BEBBDC000F96268 /* mind_map-100.png */,
+				506B2AF11BEBBD8D00F96268 /* about-100.png */,
+				506B2AEF1BEBBD6C00F96268 /* group-100.png */,
+				506B2AFF1BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png */,
+				506B2AED1BEBB9D300F96268 /* boxedIn-app-icon-75.png */,
+				506B2AD51BEA455400F96268 /* create-button.png */,
+				50C23C0E1BE9A5A0009E40BC /* settings-button.png */,
+				50C23C0C1BE9A595009E40BC /* friends-button.png */,
+				50C23C0A1BE9A589009E40BC /* play-button.png */,
+				50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */,
+				50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */,
+				50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */,
+				50E682431BE79990001EDFBA /* boxedIn-icon-1024.png */,
 				50ECC2981BD51E5F00A6E9F3 /* Info.plist */,
 				50ECC2991BD51E5F00A6E9F3 /* main.m */,
 				50ECC2BD1BD5203D00A6E9F3 /* BoxedInColors.h */,
@@ -157,6 +272,7 @@
 				50ECC2911BD51E5F00A6E9F3 /* Frameworks */,
 				50ECC2921BD51E5F00A6E9F3 /* Resources */,
 				EBD6BB3B13FC685E1492D1E7 /* Copy Pods Resources */,
+				8DAF3086DC3E551F74559888 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,7 +307,7 @@
 		50ECC28C1BD51E5F00A6E9F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Robert Miller";
 				TargetAttributes = {
 					50ECC2931BD51E5F00A6E9F3 = {
@@ -228,8 +344,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				50ECC2A31BD51E5F00A6E9F3 /* Main.storyboard in Resources */,
+				50C23C0B1BE9A589009E40BC /* play-button.png in Resources */,
 				50ECC2A81BD51E5F00A6E9F3 /* LaunchScreen.xib in Resources */,
+				50E682461BE79E03001EDFBA /* boxedIn-app-icon-1024.png in Resources */,
+				50E6824A1BE79EC6001EDFBA /* boxedIn-app-icon-180.png in Resources */,
+				506B2AF41BEBBDC000F96268 /* mind_map-100.png in Resources */,
+				506B2B021BEBDCC200F96268 /* group-32.png in Resources */,
+				506B2AFA1BEBDBAF00F96268 /* about-50@2x.png in Resources */,
+				50C23C0D1BE9A595009E40BC /* friends-button.png in Resources */,
 				50ECC2A51BD51E5F00A6E9F3 /* Images.xcassets in Resources */,
+				506B2B001BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png in Resources */,
+				50E682491BE79EC6001EDFBA /* boxedIn-app-icon-120.png in Resources */,
+				506B2B061BEBDCE500F96268 /* about-32.png in Resources */,
+				506B2AEE1BEBB9D300F96268 /* boxedIn-app-icon-75.png in Resources */,
+				506B2AF81BEBDB9D00F96268 /* mind_map-50@2x.png in Resources */,
+				506B2AF21BEBBD8D00F96268 /* about-100.png in Resources */,
+				506B2AFE1BEBDBF900F96268 /* play-button-icon-50@2x.png in Resources */,
+				506B2B111BEBEDE200F96268 /* MainWindow.xib in Resources */,
+				506B2AD61BEA455400F96268 /* create-button.png in Resources */,
+				506B2B0F1BEBEC1000F96268 /* ViewController.xib in Resources */,
+				506B2AFC1BEBDBBB00F96268 /* group-50@2x.png in Resources */,
+				506B2B081BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png in Resources */,
+				506B2AF61BEBBE2200F96268 /* play-button-icon.png in Resources */,
+				50C23C0F1BE9A5A0009E40BC /* settings-button.png in Resources */,
+				506B2B041BEBDCDA00F96268 /* mind_map-32.png in Resources */,
+				50E682441BE79990001EDFBA /* boxedIn-icon-1024.png in Resources */,
+				506B2AF01BEBBD6C00F96268 /* group-100.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +383,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8DAF3086DC3E551F74559888 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D20BA7C5BEAA81A394F009E8 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -280,9 +435,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50ECC2A01BD51E5F00A6E9F3 /* ViewController.m in Sources */,
+				506B2ADD1BEBB5D100F96268 /* InfoPageViewController.m in Sources */,
+				506B2AD91BEBB5A600F96268 /* FriendListViewController.m in Sources */,
+				506B2AE01BEBB5E700F96268 /* GameListViewController.m in Sources */,
+				506B2AE91BEBB61100F96268 /* FriendPageViewController.m in Sources */,
+				506B2B0E1BEBEC1000F96268 /* ViewController.m in Sources */,
+				506B2AEC1BEBB62000F96268 /* NewGameViewController.m in Sources */,
 				50ECC29D1BD51E5F00A6E9F3 /* AppDelegate.m in Sources */,
+				506B2AE61BEBB60300F96268 /* GameBoardViewController.m in Sources */,
 				50ECC29A1BD51E5F00A6E9F3 /* main.m in Sources */,
+				506B2AE31BEBB5F800F96268 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +507,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -413,6 +576,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BoxedIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmiller.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -424,6 +588,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BoxedIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmiller.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -442,6 +607,7 @@
 				);
 				INFOPLIST_FILE = BoxedInTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmiller.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxedIn.app/BoxedIn";
 			};
@@ -457,6 +623,7 @@
 				);
 				INFOPLIST_FILE = BoxedInTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmiller.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxedIn.app/BoxedIn";
 			};

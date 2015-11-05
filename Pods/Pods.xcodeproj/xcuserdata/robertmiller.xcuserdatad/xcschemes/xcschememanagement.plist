@@ -4,17 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Bolts.xcscheme</key>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Parse.xcscheme</key>
+		<key>FlatUIKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TopTabBarView.xcscheme</key>
+		<key>MinimalTabBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,7 +29,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>TopTabBarView.xcscheme</key>
+		<key>SSUIViewMiniMe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>VBFPopFlatButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>7A0424CD3B094AE7BE43CEBD</key>
+		<key>13585F7FFF948C694C7B585B72B548C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D4BE46E67CDF5715F47DEA7</key>
+		<key>26EDF1145FC391BA7361343AB0236E51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CFEE8283DDCE893FD934F7C</key>
+		<key>33BE8D0D97897D7F865F88AF02340525</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CDEEE1BF58FED4189CB789EF</key>
+		<key>3C40AD938D23DF5F8345D23B4D3E1644</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E8BA6297AC9B1C9C5C196B25</key>
+		<key>5366B7F679CF2BA31EA583EA35CA2D90</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>725C659CC23CE2F2641A6FA80999E1F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E0AC8008AC4F3666FEE72A492046EDC3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6369DCF9EF8959EE460063E1C27CF48</key>
 		<dict>
 			<key>primary</key>
 			<true/>

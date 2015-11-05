@@ -7,8 +7,20 @@
 //
 
 #import "AppDelegate.h"
+#import <MinimalTabBar/JDMinimalTabBarController.h>
+#import "ViewController.h"
+#import "FriendListViewController.h"
+#import "FriendPageViewController.h"
+#import "InfoPageViewController.h"
+#import "GameBoardViewController.h"
+#import "GameListViewController.h"
+#import "SettingsViewController.h"
+#import "NewGameViewController.h"
+#import "BoxedInColors.h"
 
 @interface AppDelegate ()
+
+@property(nonatomic,retain) JDMinimalTabBarController *tabBarController;
 
 @end
 
@@ -16,12 +28,71 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    UIToolbar *tabBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height * 0.09)];
-    tabBar.backgroundColor = [UIColor lightGrayColor];
+    //self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
     
-    [self.window addSubview:tabBar];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     
+    ViewController *frontPage = [storyboard instantiateViewControllerWithIdentifier:@"frontPageViewController"];
+    //ViewController *frontPage = [[ViewController alloc] init];
+    //[frontPage.view setFrame:self.window.frame];
+    //frontPage.view.backgroundColor = BILightGrey;
+    NSLog(@"size in app delegate: %f x %f", frontPage.view.frame.size.width, frontPage.view.frame.size.height);
+    UITabBarItem *frontPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"boxedIn" image:[UIImage imageNamed: @"boxedIn-app-icon-50-with-alpha.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    frontPage.tabBarItem = frontPageTabBarItem;
+    
+    FriendListViewController *friendList = [storyboard instantiateViewControllerWithIdentifier:@"friendListViewController"];
+    //FriendListViewController *friendList = [[FriendListViewController alloc] init];
+    //[friendList.view setFrame:self.window.frame];
+    //friendList.view.backgroundColor = BILightGrey;
+    UITabBarItem *friendListTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Friends" image:[UIImage imageNamed:@"group-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    friendList.tabBarItem = friendListTabBarItem;
+    
+    InfoPageViewController *infoPage = [storyboard instantiateViewControllerWithIdentifier:@"infoPageViewController"];
+    //InfoPageViewController *infoPage = [[InfoPageViewController alloc] init];
+    //[infoPage.view setFrame:self.window.frame];
+    //infoPage.view.backgroundColor = BIDarkGrey;
+    UITabBarItem *infoPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"about-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    infoPage.tabBarItem = infoPageTabBarItem;
+    
+    GameListViewController *gameList = [storyboard instantiateViewControllerWithIdentifier:@"gameListViewController"];
+    //GameListViewController *gameList = [[GameListViewController alloc] init];
+    //[gameList.view setFrame:self.window.frame];
+    //gameList.view.backgroundColor = BIGreen;
+    UITabBarItem *gameListTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Games" image:[UIImage imageNamed:@"play-button-icon-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    gameList.tabBarItem = gameListTabBarItem;
+    
+    SettingsViewController *settingsPage = [storyboard instantiateViewControllerWithIdentifier:@"settingsViewController"];
+    //SettingsViewController *settingsPage = [[SettingsViewController alloc] init];
+    //[settingsPage.view setFrame:self.window.frame];
+    //settingsPage.view.backgroundColor = BIOrange;
+    UITabBarItem *settingsPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:[UIImage imageNamed:@"mind_map-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    settingsPage.tabBarItem = settingsPageTabBarItem;
+    
+    _tabBarController = [[JDMinimalTabBarController alloc] init];
+    
+    [self.window addSubview:frontPage.view];
+    [self.window addSubview:infoPage.view];
+    [self.window addSubview:settingsPage.view];
+    [self.window addSubview:friendList.view];
+    [self.window addSubview:gameList.view];
+    [self.window setRootViewController:_tabBarController];
+    
+    _tabBarController.minimalBar.defaultTintColor = BIGreen;
+    _tabBarController.minimalBar.selectedTintColor = BIDarkGrey;//[UIColor colorWithRed:222.0f/255.f green:157.0f/255.f blue:0.0f/255.f alpha:1.f];
+    _tabBarController.minimalBar.showTitles = YES;
+    _tabBarController.minimalBar.hidesTitlesWhenSelected = YES;
+    _tabBarController.minimalBar.backgroundColor = [UIColor clearColor];
+    [_tabBarController setViewControllers:@[infoPage, frontPage, settingsPage, friendList, gameList]];
+    
+    return YES;
+}
+
+- (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
