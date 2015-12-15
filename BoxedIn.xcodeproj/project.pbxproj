@@ -31,12 +31,32 @@
 		506B2B061BEBDCE500F96268 /* about-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B051BEBDCE500F96268 /* about-32.png */; };
 		506B2B081BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B071BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png */; };
 		506B2B0E1BEBEC1000F96268 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B0C1BEBEC1000F96268 /* ViewController.m */; };
-		506B2B0F1BEBEC1000F96268 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B0D1BEBEC1000F96268 /* ViewController.xib */; };
-		506B2B111BEBEDE200F96268 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B101BEBEDE200F96268 /* MainWindow.xib */; };
+		506B2B131BED06C300F96268 /* boxedIn-icon-1024-with-alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B121BED06C300F96268 /* boxedIn-icon-1024-with-alpha.png */; };
+		506B2B151BED07D800F96268 /* boxedIn-text-1024-with-alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B141BED07D800F96268 /* boxedIn-text-1024-with-alpha.png */; };
+		506B2B181BED346400F96268 /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B171BED346400F96268 /* FriendCell.m */; };
+		506B2B1B1BED347500F96268 /* GameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B1A1BED347500F96268 /* GameCell.m */; };
+		506B2B201BF13DB500F96268 /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B1D1BF13DB500F96268 /* dot.png */; };
+		506B2B2C1BF2693800F96268 /* play-toolbar-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B2B1BF2693800F96268 /* play-toolbar-icon@2x.png */; };
+		506B2B2E1BF269DD00F96268 /* boxedIn-toolbar-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B2D1BF269DD00F96268 /* boxedIn-toolbar-icon@2x.png */; };
+		506B2B341BF3777200F96268 /* GBCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B331BF3777200F96268 /* GBCoordinate.m */; };
+		506B2B371BF3779000F96268 /* GBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B361BF3779000F96268 /* GBButton.m */; };
+		506B2B3C1BF398B200F96268 /* grey-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B3B1BF398B200F96268 /* grey-line.png */; };
+		506B2B401BF39B4800F96268 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B3D1BF39B4800F96268 /* line.png */; };
+		506B2B411BF39B4800F96268 /* vertical-grey-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B3E1BF39B4800F96268 /* vertical-grey-line.png */; };
+		506B2B421BF39B4800F96268 /* vertical-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B3F1BF39B4800F96268 /* vertical-line.png */; };
+		506B2B441BF4D4C100F96268 /* boxedIn-splash-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2B431BF4D4C100F96268 /* boxedIn-splash-1024.png */; };
+		506B2B471BF4DB9000F96268 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B461BF4DB9000F96268 /* UIImageView+Letters.m */; };
+		506B2B4B1BF4E6A600F96268 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B4A1BF4E6A600F96268 /* LoginViewController.m */; };
+		506B2B4E1BFC0F2500F96268 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506B2B4D1BFC0F2500F96268 /* GameKit.framework */; };
+		506B2B501BFC113200F96268 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506B2B4F1BFC113200F96268 /* MultipeerConnectivity.framework */; };
+		506B2B531BFFAB7400F96268 /* NewFriendGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B521BFFAB7400F96268 /* NewFriendGameViewController.m */; };
+		506B2B561C0E681B00F96268 /* PFObject+Coder.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B551C0E681B00F96268 /* PFObject+Coder.m */; };
+		506B2B591C1079D600F96268 /* PFFile+Coder.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2B581C1079D600F96268 /* PFFile+Coder.m */; };
+		5087B39B1C17271900E8AB87 /* boxedIn-app-icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087B39A1C17271900E8AB87 /* boxedIn-app-icon-76.png */; };
+		5087B39D1C172A0700E8AB87 /* boxedIn-app-icon-152@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087B39C1C172A0700E8AB87 /* boxedIn-app-icon-152@2x.png */; };
 		50C23C0B1BE9A589009E40BC /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0A1BE9A589009E40BC /* play-button.png */; };
 		50C23C0D1BE9A595009E40BC /* friends-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0C1BE9A595009E40BC /* friends-button.png */; };
 		50C23C0F1BE9A5A0009E40BC /* settings-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0E1BE9A5A0009E40BC /* settings-button.png */; };
-		50E682441BE79990001EDFBA /* boxedIn-icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682431BE79990001EDFBA /* boxedIn-icon-1024.png */; };
 		50E682461BE79E03001EDFBA /* boxedIn-app-icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */; };
 		50E682491BE79EC6001EDFBA /* boxedIn-app-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */; };
 		50E6824A1BE79EC6001EDFBA /* boxedIn-app-icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */; };
@@ -91,12 +111,41 @@
 		506B2B071BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-icon-50-with-alpha@2x.png"; sourceTree = "<group>"; };
 		506B2B0B1BEBEC1000F96268 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		506B2B0C1BEBEC1000F96268 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		506B2B0D1BEBEC1000F96268 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		506B2B101BEBEDE200F96268 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		506B2B121BED06C300F96268 /* boxedIn-icon-1024-with-alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-icon-1024-with-alpha.png"; sourceTree = "<group>"; };
+		506B2B141BED07D800F96268 /* boxedIn-text-1024-with-alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-text-1024-with-alpha.png"; sourceTree = "<group>"; };
+		506B2B161BED346400F96268 /* FriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCell.h; sourceTree = "<group>"; };
+		506B2B171BED346400F96268 /* FriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCell.m; sourceTree = "<group>"; };
+		506B2B191BED347500F96268 /* GameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCell.h; sourceTree = "<group>"; };
+		506B2B1A1BED347500F96268 /* GameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCell.m; sourceTree = "<group>"; };
+		506B2B1D1BF13DB500F96268 /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot.png; sourceTree = "<group>"; };
+		506B2B2B1BF2693800F96268 /* play-toolbar-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-toolbar-icon@2x.png"; sourceTree = "<group>"; };
+		506B2B2D1BF269DD00F96268 /* boxedIn-toolbar-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-toolbar-icon@2x.png"; sourceTree = "<group>"; };
+		506B2B321BF3777200F96268 /* GBCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBCoordinate.h; sourceTree = "<group>"; };
+		506B2B331BF3777200F96268 /* GBCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBCoordinate.m; sourceTree = "<group>"; };
+		506B2B351BF3779000F96268 /* GBButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBButton.h; sourceTree = "<group>"; };
+		506B2B361BF3779000F96268 /* GBButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBButton.m; sourceTree = "<group>"; };
+		506B2B3B1BF398B200F96268 /* grey-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-line.png"; sourceTree = "<group>"; };
+		506B2B3D1BF39B4800F96268 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		506B2B3E1BF39B4800F96268 /* vertical-grey-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vertical-grey-line.png"; sourceTree = "<group>"; };
+		506B2B3F1BF39B4800F96268 /* vertical-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vertical-line.png"; sourceTree = "<group>"; };
+		506B2B431BF4D4C100F96268 /* boxedIn-splash-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-splash-1024.png"; sourceTree = "<group>"; };
+		506B2B451BF4DB9000F96268 /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
+		506B2B461BF4DB9000F96268 /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
+		506B2B491BF4E6A600F96268 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		506B2B4A1BF4E6A600F96268 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		506B2B4D1BFC0F2500F96268 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		506B2B4F1BFC113200F96268 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		506B2B511BFFAB7400F96268 /* NewFriendGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFriendGameViewController.h; sourceTree = "<group>"; };
+		506B2B521BFFAB7400F96268 /* NewFriendGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendGameViewController.m; sourceTree = "<group>"; };
+		506B2B541C0E681B00F96268 /* PFObject+Coder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PFObject+Coder.h"; sourceTree = "<group>"; };
+		506B2B551C0E681B00F96268 /* PFObject+Coder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFObject+Coder.m"; sourceTree = "<group>"; };
+		506B2B571C1079D600F96268 /* PFFile+Coder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PFFile+Coder.h"; sourceTree = "<group>"; };
+		506B2B581C1079D600F96268 /* PFFile+Coder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFFile+Coder.m"; sourceTree = "<group>"; };
+		5087B39A1C17271900E8AB87 /* boxedIn-app-icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "boxedIn-app-icon-76.png"; path = "../../../IPAs/boxedIn/boxedIn-app-icon-76.png"; sourceTree = "<group>"; };
+		5087B39C1C172A0700E8AB87 /* boxedIn-app-icon-152@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "boxedIn-app-icon-152@2x.png"; path = "../../../IPAs/boxedIn/boxedIn-app-icon-152@2x.png"; sourceTree = "<group>"; };
 		50C23C0A1BE9A589009E40BC /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
 		50C23C0C1BE9A595009E40BC /* friends-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends-button.png"; sourceTree = "<group>"; };
 		50C23C0E1BE9A5A0009E40BC /* settings-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button.png"; sourceTree = "<group>"; };
-		50E682431BE79990001EDFBA /* boxedIn-icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-icon-1024.png"; sourceTree = "<group>"; };
 		50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-1024.png"; sourceTree = "<group>"; };
 		50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-120.png"; sourceTree = "<group>"; };
 		50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-180.png"; sourceTree = "<group>"; };
@@ -121,6 +170,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				506B2B501BFC113200F96268 /* MultipeerConnectivity.framework in Frameworks */,
+				506B2B4E1BFC0F2500F96268 /* GameKit.framework in Frameworks */,
 				0728F68E36D7FD309593C66E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +186,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5003DA571C1766A900BDA05B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				506B2B3B1BF398B200F96268 /* grey-line.png */,
+				506B2B3D1BF39B4800F96268 /* line.png */,
+				506B2B3E1BF39B4800F96268 /* vertical-grey-line.png */,
+				506B2B3F1BF39B4800F96268 /* vertical-line.png */,
+				506B2B2D1BF269DD00F96268 /* boxedIn-toolbar-icon@2x.png */,
+				506B2B2B1BF2693800F96268 /* play-toolbar-icon@2x.png */,
+				506B2B1D1BF13DB500F96268 /* dot.png */,
+				506B2B141BED07D800F96268 /* boxedIn-text-1024-with-alpha.png */,
+				506B2B121BED06C300F96268 /* boxedIn-icon-1024-with-alpha.png */,
+				506B2B071BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png */,
+				506B2B051BEBDCE500F96268 /* about-32.png */,
+				506B2B031BEBDCDA00F96268 /* mind_map-32.png */,
+				506B2B011BEBDCC200F96268 /* group-32.png */,
+				506B2AFD1BEBDBF900F96268 /* play-button-icon-50@2x.png */,
+				506B2AFB1BEBDBBB00F96268 /* group-50@2x.png */,
+				506B2AF91BEBDBAF00F96268 /* about-50@2x.png */,
+				506B2AF71BEBDB9D00F96268 /* mind_map-50@2x.png */,
+				506B2AF51BEBBE2200F96268 /* play-button-icon.png */,
+				506B2AF31BEBBDC000F96268 /* mind_map-100.png */,
+				506B2AF11BEBBD8D00F96268 /* about-100.png */,
+				506B2AEF1BEBBD6C00F96268 /* group-100.png */,
+				5087B39C1C172A0700E8AB87 /* boxedIn-app-icon-152@2x.png */,
+				5087B39A1C17271900E8AB87 /* boxedIn-app-icon-76.png */,
+				506B2AFF1BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png */,
+				506B2AED1BEBB9D300F96268 /* boxedIn-app-icon-75.png */,
+				506B2AD51BEA455400F96268 /* create-button.png */,
+				50C23C0E1BE9A5A0009E40BC /* settings-button.png */,
+				50C23C0C1BE9A595009E40BC /* friends-button.png */,
+				50C23C0A1BE9A589009E40BC /* play-button.png */,
+				50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */,
+				50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */,
+				50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */,
+				506B2B431BF4D4C100F96268 /* boxedIn-splash-1024.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		506B2ADA1BEBB5B600F96268 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,10 +245,48 @@
 				506B2AEB1BEBB62000F96268 /* NewGameViewController.m */,
 				506B2B0B1BEBEC1000F96268 /* ViewController.h */,
 				506B2B0C1BEBEC1000F96268 /* ViewController.m */,
-				506B2B0D1BEBEC1000F96268 /* ViewController.xib */,
-				506B2B101BEBEDE200F96268 /* MainWindow.xib */,
+				506B2B491BF4E6A600F96268 /* LoginViewController.h */,
+				506B2B4A1BF4E6A600F96268 /* LoginViewController.m */,
+				506B2B511BFFAB7400F96268 /* NewFriendGameViewController.h */,
+				506B2B521BFFAB7400F96268 /* NewFriendGameViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		506B2B1C1BED347D00F96268 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				506B2B161BED346400F96268 /* FriendCell.h */,
+				506B2B171BED346400F96268 /* FriendCell.m */,
+				506B2B191BED347500F96268 /* GameCell.h */,
+				506B2B1A1BED347500F96268 /* GameCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		506B2B381BF377D400F96268 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				506B2B321BF3777200F96268 /* GBCoordinate.h */,
+				506B2B331BF3777200F96268 /* GBCoordinate.m */,
+				506B2B351BF3779000F96268 /* GBButton.h */,
+				506B2B361BF3779000F96268 /* GBButton.m */,
+				506B2B541C0E681B00F96268 /* PFObject+Coder.h */,
+				506B2B551C0E681B00F96268 /* PFObject+Coder.m */,
+				506B2B571C1079D600F96268 /* PFFile+Coder.h */,
+				506B2B581C1079D600F96268 /* PFFile+Coder.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		506B2B481BF4DBA200F96268 /* includes */ = {
+			isa = PBXGroup;
+			children = (
+				506B2B451BF4DB9000F96268 /* UIImageView+Letters.h */,
+				506B2B461BF4DB9000F96268 /* UIImageView+Letters.m */,
+				50ECC2BD1BD5203D00A6E9F3 /* BoxedInColors.h */,
+			);
+			name = includes;
 			sourceTree = "<group>";
 		};
 		50ECC28B1BD51E5F00A6E9F3 = {
@@ -185,10 +314,13 @@
 			children = (
 				50ECC29B1BD51E5F00A6E9F3 /* AppDelegate.h */,
 				50ECC29C1BD51E5F00A6E9F3 /* AppDelegate.m */,
+				506B2B381BF377D400F96268 /* Models */,
+				506B2B1C1BED347D00F96268 /* Views */,
 				506B2ADA1BEBB5B600F96268 /* View Controllers */,
 				50ECC2A11BD51E5F00A6E9F3 /* Main.storyboard */,
 				50ECC2A41BD51E5F00A6E9F3 /* Images.xcassets */,
 				50ECC2A61BD51E5F00A6E9F3 /* LaunchScreen.xib */,
+				506B2B481BF4DBA200F96268 /* includes */,
 				50ECC2971BD51E5F00A6E9F3 /* Supporting Files */,
 			);
 			path = BoxedIn;
@@ -197,31 +329,9 @@
 		50ECC2971BD51E5F00A6E9F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				506B2B071BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png */,
-				506B2B051BEBDCE500F96268 /* about-32.png */,
-				506B2B031BEBDCDA00F96268 /* mind_map-32.png */,
-				506B2B011BEBDCC200F96268 /* group-32.png */,
-				506B2AFD1BEBDBF900F96268 /* play-button-icon-50@2x.png */,
-				506B2AFB1BEBDBBB00F96268 /* group-50@2x.png */,
-				506B2AF91BEBDBAF00F96268 /* about-50@2x.png */,
-				506B2AF71BEBDB9D00F96268 /* mind_map-50@2x.png */,
-				506B2AF51BEBBE2200F96268 /* play-button-icon.png */,
-				506B2AF31BEBBDC000F96268 /* mind_map-100.png */,
-				506B2AF11BEBBD8D00F96268 /* about-100.png */,
-				506B2AEF1BEBBD6C00F96268 /* group-100.png */,
-				506B2AFF1BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png */,
-				506B2AED1BEBB9D300F96268 /* boxedIn-app-icon-75.png */,
-				506B2AD51BEA455400F96268 /* create-button.png */,
-				50C23C0E1BE9A5A0009E40BC /* settings-button.png */,
-				50C23C0C1BE9A595009E40BC /* friends-button.png */,
-				50C23C0A1BE9A589009E40BC /* play-button.png */,
-				50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */,
-				50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */,
-				50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */,
-				50E682431BE79990001EDFBA /* boxedIn-icon-1024.png */,
+				5003DA571C1766A900BDA05B /* Images */,
 				50ECC2981BD51E5F00A6E9F3 /* Info.plist */,
 				50ECC2991BD51E5F00A6E9F3 /* main.m */,
-				50ECC2BD1BD5203D00A6E9F3 /* BoxedInColors.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,6 +356,8 @@
 		5C2D848774B953A96F3EFE17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				506B2B4F1BFC113200F96268 /* MultipeerConnectivity.framework */,
+				506B2B4D1BFC0F2500F96268 /* GameKit.framework */,
 				8F2DC43E27BC668991726707 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -312,6 +424,12 @@
 				TargetAttributes = {
 					50ECC2931BD51E5F00A6E9F3 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = G98XDUC443;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					50ECC2AC1BD51E5F00A6E9F3 = {
 						CreatedOnToolsVersion = 6.4;
@@ -344,31 +462,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				50ECC2A31BD51E5F00A6E9F3 /* Main.storyboard in Resources */,
+				506B2B201BF13DB500F96268 /* dot.png in Resources */,
 				50C23C0B1BE9A589009E40BC /* play-button.png in Resources */,
+				506B2B401BF39B4800F96268 /* line.png in Resources */,
 				50ECC2A81BD51E5F00A6E9F3 /* LaunchScreen.xib in Resources */,
+				506B2B151BED07D800F96268 /* boxedIn-text-1024-with-alpha.png in Resources */,
+				5087B39B1C17271900E8AB87 /* boxedIn-app-icon-76.png in Resources */,
 				50E682461BE79E03001EDFBA /* boxedIn-app-icon-1024.png in Resources */,
 				50E6824A1BE79EC6001EDFBA /* boxedIn-app-icon-180.png in Resources */,
 				506B2AF41BEBBDC000F96268 /* mind_map-100.png in Resources */,
 				506B2B021BEBDCC200F96268 /* group-32.png in Resources */,
 				506B2AFA1BEBDBAF00F96268 /* about-50@2x.png in Resources */,
+				506B2B2E1BF269DD00F96268 /* boxedIn-toolbar-icon@2x.png in Resources */,
+				506B2B131BED06C300F96268 /* boxedIn-icon-1024-with-alpha.png in Resources */,
+				506B2B3C1BF398B200F96268 /* grey-line.png in Resources */,
 				50C23C0D1BE9A595009E40BC /* friends-button.png in Resources */,
 				50ECC2A51BD51E5F00A6E9F3 /* Images.xcassets in Resources */,
 				506B2B001BEBDC2400F96268 /* boxedIn-app-icon-50@2x.png in Resources */,
 				50E682491BE79EC6001EDFBA /* boxedIn-app-icon-120.png in Resources */,
 				506B2B061BEBDCE500F96268 /* about-32.png in Resources */,
+				506B2B441BF4D4C100F96268 /* boxedIn-splash-1024.png in Resources */,
 				506B2AEE1BEBB9D300F96268 /* boxedIn-app-icon-75.png in Resources */,
 				506B2AF81BEBDB9D00F96268 /* mind_map-50@2x.png in Resources */,
+				506B2B421BF39B4800F96268 /* vertical-line.png in Resources */,
+				506B2B411BF39B4800F96268 /* vertical-grey-line.png in Resources */,
+				5087B39D1C172A0700E8AB87 /* boxedIn-app-icon-152@2x.png in Resources */,
+				506B2B2C1BF2693800F96268 /* play-toolbar-icon@2x.png in Resources */,
 				506B2AF21BEBBD8D00F96268 /* about-100.png in Resources */,
 				506B2AFE1BEBDBF900F96268 /* play-button-icon-50@2x.png in Resources */,
-				506B2B111BEBEDE200F96268 /* MainWindow.xib in Resources */,
 				506B2AD61BEA455400F96268 /* create-button.png in Resources */,
-				506B2B0F1BEBEC1000F96268 /* ViewController.xib in Resources */,
 				506B2AFC1BEBDBBB00F96268 /* group-50@2x.png in Resources */,
 				506B2B081BEBE0A600F96268 /* boxedIn-icon-50-with-alpha@2x.png in Resources */,
 				506B2AF61BEBBE2200F96268 /* play-button-icon.png in Resources */,
 				50C23C0F1BE9A5A0009E40BC /* settings-button.png in Resources */,
 				506B2B041BEBDCDA00F96268 /* mind_map-32.png in Resources */,
-				50E682441BE79990001EDFBA /* boxedIn-icon-1024.png in Resources */,
 				506B2AF01BEBBD6C00F96268 /* group-100.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,16 +562,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				506B2B591C1079D600F96268 /* PFFile+Coder.m in Sources */,
 				506B2ADD1BEBB5D100F96268 /* InfoPageViewController.m in Sources */,
 				506B2AD91BEBB5A600F96268 /* FriendListViewController.m in Sources */,
+				506B2B371BF3779000F96268 /* GBButton.m in Sources */,
 				506B2AE01BEBB5E700F96268 /* GameListViewController.m in Sources */,
+				506B2B341BF3777200F96268 /* GBCoordinate.m in Sources */,
+				506B2B1B1BED347500F96268 /* GameCell.m in Sources */,
 				506B2AE91BEBB61100F96268 /* FriendPageViewController.m in Sources */,
+				506B2B471BF4DB9000F96268 /* UIImageView+Letters.m in Sources */,
+				506B2B561C0E681B00F96268 /* PFObject+Coder.m in Sources */,
+				506B2B4B1BF4E6A600F96268 /* LoginViewController.m in Sources */,
 				506B2B0E1BEBEC1000F96268 /* ViewController.m in Sources */,
+				506B2B531BFFAB7400F96268 /* NewFriendGameViewController.m in Sources */,
 				506B2AEC1BEBB62000F96268 /* NewGameViewController.m in Sources */,
 				50ECC29D1BD51E5F00A6E9F3 /* AppDelegate.m in Sources */,
 				506B2AE61BEBB60300F96268 /* GameBoardViewController.m in Sources */,
 				50ECC29A1BD51E5F00A6E9F3 /* main.m in Sources */,
 				506B2AE31BEBB5F800F96268 /* SettingsViewController.m in Sources */,
+				506B2B181BED346400F96268 /* FriendCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,7 +710,9 @@
 			baseConfigurationReference = 6F2349C0E9C4687E6C2638ED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BoxedIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmiller.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -586,7 +724,9 @@
 			baseConfigurationReference = 0444D99D7AF0FA727301C6DB /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BoxedIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmiller.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

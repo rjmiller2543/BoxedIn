@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FriendListViewController : UIViewController
+@interface FriendListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+
+@property(nonatomic,retain) IBOutlet UITableView *tableView;
+@property(nonatomic,retain) IBOutlet UISearchBar *searchBar;
 
 @end

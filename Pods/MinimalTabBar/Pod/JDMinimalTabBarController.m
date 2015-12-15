@@ -245,13 +245,17 @@ static CGFloat minimalBarHeight = 70.f;
     }
     
     [_viewControllers enumerateObjectsUsingBlock: ^(UIViewController* viewController, NSUInteger idx, BOOL *stop) {
-        viewController.view.frame = CGRectMake(self.view.frame.size.width * idx, 0, self.view.frame.size.width, self.view.frame.size.height);
-        viewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+        NSLog(@"vc size: %f x %f at index: %lu", viewController.view.frame.size.width, viewController.view.frame.size.height, (unsigned long)idx);
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width * idx, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [containerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        //viewController.view.frame = CGRectMake(self.view.frame.size.width * idx, 0, self.view.frame.size.width, self.view.frame.size.height);
+        //viewController.view.translatesAutoresizingMaskIntoConstraints = NO;
         viewController.view.tag = idx;
         viewController.tabBarItem.tag = idx;
+        [containerView addSubview:viewController.view];
         
         _viewControllerTransform = viewController.view.transform;
-        [self.scrollView addSubview:viewController.view];
+        [_scrollView addSubview:containerView];
     }];
     
     [self.view addConstraints:[self defaultConstraints]];

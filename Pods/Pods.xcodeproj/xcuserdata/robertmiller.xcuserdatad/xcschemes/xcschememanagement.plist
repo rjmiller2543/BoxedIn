@@ -9,7 +9,47 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Facebook-iOS-SDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FlatUIKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MZAppearance.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MZFormSheetController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,12 +64,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ParseFacebookUtils.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>SSUIViewMiniMe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UIView+FDCollapsibleConstraints.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,7 +102,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>13585F7FFF948C694C7B585B72B548C4</key>
+		<key>1DAC2FF166EBB39D93C76C245CCD170C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1DDCEC8C39612E9E7FAB4203762DD632</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>33BE8D0D97897D7F865F88AF02340525</key>
+		<key>28F888751B5EF28C5388596F1C8194C0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3C40AD938D23DF5F8345D23B4D3E1644</key>
+		<key>2EFEDBB649146422B0A076290AB959DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,12 +132,62 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>725C659CC23CE2F2641A6FA80999E1F4</key>
+		<key>59C7B884335BF97F71D38DBB38D1EF2A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E0AC8008AC4F3666FEE72A492046EDC3</key>
+		<key>5A6DB7A94477A4B25220873FB3B139E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>61DFD15E1A174FFE8DBFED89F10AA3F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>913C2EB7B2A5B995031123530CF4D9CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94CD1C8F66FD669E18E0C48C70DC827D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>99220212B2AC6983C77B6F14B07597F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9A7B3EC56C791BE78C1EFE569A1CEA3A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F3A3DAF2523F0F6FEC26AC469CD4639</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A48601FEE4437A924848DB48369BA809</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9B4FE4FD0FD68D263FD8C5E12E29AB2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D607CE439EBD256738A38E8D3933E56F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D98FC16A1EEB3B4D6C1497C6977A9952</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,8 +7,13 @@
 //
 
 #import "FriendPageViewController.h"
+#import <FlatUIKit.h>
+#import "NewGameViewController.h"
+#import <MZFormSheetController.h>
 
 @interface FriendPageViewController ()
+
+@property(nonatomic) BOOL connectedToUser;
 
 @end
 
@@ -17,11 +22,59 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSString *userlabelstring = @"@";
+    if (_friendUser != nil) {
+        _userLabel.text = [userlabelstring stringByAppendingString:_friendUser.username];
+        _gamesPlayedLabel.text = [_friendUser[@"gamesPlayed"] stringValue];
+        _gamesWonLabel.text = [_friendUser[@"totalWins"] stringValue];
+        _totalBoxesLabel.text = [_friendUser[@"totalBoxes"] stringValue];
+    }
+}
+
+-(void)viewDidLayoutSubviews {
+    NSArray *friendArray = [PFUser currentUser][@"friendsList"];
+    if ([friendArray containsObject:_friendUser.objectId]) {
+        _connectedToUser = true;
+        _connectButton.titleLabel.text = @"Unfriend";
+    }
+    else if (friendArray == nil) {
+        _connectedToUser = false;
+        _connectButton.titleLabel.text = @"Friend";
+    }
+    else {
+        _connectedToUser = false;
+        _connectButton.titleLabel.text = @"Friend";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)connectButtonPressed:(id)sender {
+    if (_connectedToUser == false) {
+        [[PFUser currentUser] addObject:_friendUser.objectId forKey:@"friendsList"];
+        [[PFUser currentUser] saveInBackground];
+    }
+}
+
+-(void)messageButtonPressed:(id)sender {
+    
+}
+
+-(void)newGameButtonPressed:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NewGameViewController *newGame = [storyboard instantiateViewControllerWithIdentifier:@"newGameViewController"];
+    [self presentViewController:newGame animated:YES completion:^{
+        [newGame setupFriendGame:_friendUser];
+    }];
+}
+
+-(void)closePage:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        // up up
+    }];
 }
 
 /*

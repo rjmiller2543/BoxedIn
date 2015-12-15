@@ -7,7 +7,38 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FlatUIKit.h>
+#import <Parse.h>
 
-@interface GameBoardViewController : UIViewController
+@protocol GameBoardViewControllerDelegate;
+
+@interface GameBoardViewController : UIViewController <UIScrollViewDelegate>
+
+@property(nonatomic,assign) id<GameBoardViewControllerDelegate> delegate;
+
+@property(nonatomic,retain) IBOutlet UILabel *opponentUserLabel;
+@property(nonatomic,retain) IBOutlet UILabel *opponentScoreLabel;
+@property(nonatomic,retain) IBOutlet UILabel *myUserLabel;
+@property(nonatomic,retain) IBOutlet UILabel *myScoreLabel;
+@property(nonatomic,retain) IBOutlet UIScrollView *gameBoardView;
+
+@property(nonatomic,retain) UITapGestureRecognizer *tapGesture;
+
+@property(nonatomic,retain) PFObject *game;
+@property(nonatomic) int gameType;
+
+@property(nonatomic) bool playerOneTurn;
+
+@property(nonatomic,retain) id prevViewController;
+
+-(void)setupGameBoard;
+-(void)updateDataPoints;
+
+@end
+
+@protocol GameBoardViewControllerDelegate <NSObject>
+
+@optional
+-(void)updateGameBoard:(GameBoardViewController*)gameBoard WithData:(NSData*)data;
 
 @end

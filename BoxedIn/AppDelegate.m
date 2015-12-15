@@ -17,6 +17,9 @@
 #import "SettingsViewController.h"
 #import "NewGameViewController.h"
 #import "BoxedInColors.h"
+#import <PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 
 @interface AppDelegate ()
 
@@ -26,8 +29,38 @@
 
 @implementation AppDelegate
 
++(id)sharedInstance
+{
+    return [[UIApplication sharedApplication] delegate];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 0];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    [Parse enableLocalDatastore];
+    [Parse setApplicationId:@"aSJwZ9zYs5qmdb4KHc13UIbKvPB2bS0viHUGDKJW" clientKey:@"lPRPpHn5Vlglzd1vIYfGqwAsamhapHXJ6i8jGguW"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    [PFFacebookUtils initializeFacebook];
+    
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes  categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
+    NSLog(@"password: %@", password);
+    
+    if (userName == nil) {
+        _parseUser = nil;
+    }
+    else {
+        NSError *error = nil;
+        _parseUser = [PFUser logInWithUsername:userName password:password error:&error];
+        
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -38,62 +71,104 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     
     ViewController *frontPage = [storyboard instantiateViewControllerWithIdentifier:@"frontPageViewController"];
-    //ViewController *frontPage = [[ViewController alloc] init];
-    //[frontPage.view setFrame:self.window.frame];
-    //frontPage.view.backgroundColor = BILightGrey;
     NSLog(@"size in app delegate: %f x %f", frontPage.view.frame.size.width, frontPage.view.frame.size.height);
-    UITabBarItem *frontPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"boxedIn" image:[UIImage imageNamed: @"boxedIn-app-icon-50-with-alpha.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    UITabBarItem *frontPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"boxedIn" image:[UIImage imageNamed: @"boxedIn-toolbar-icon.png"] selectedImage:[UIImage imageNamed:@"boxedIn-toolbar-icon.png"]];
     frontPage.tabBarItem = frontPageTabBarItem;
     
     FriendListViewController *friendList = [storyboard instantiateViewControllerWithIdentifier:@"friendListViewController"];
-    //FriendListViewController *friendList = [[FriendListViewController alloc] init];
-    //[friendList.view setFrame:self.window.frame];
-    //friendList.view.backgroundColor = BILightGrey;
-    UITabBarItem *friendListTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Friends" image:[UIImage imageNamed:@"group-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    UITabBarItem *friendListTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Friends" image:[UIImage imageNamed:@"group-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-toolbar-icon.png"]];
     friendList.tabBarItem = friendListTabBarItem;
     
     InfoPageViewController *infoPage = [storyboard instantiateViewControllerWithIdentifier:@"infoPageViewController"];
-    //InfoPageViewController *infoPage = [[InfoPageViewController alloc] init];
-    //[infoPage.view setFrame:self.window.frame];
-    //infoPage.view.backgroundColor = BIDarkGrey;
-    UITabBarItem *infoPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"about-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    UITabBarItem *infoPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"about-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-toolbar-icon.png"]];
     infoPage.tabBarItem = infoPageTabBarItem;
     
     GameListViewController *gameList = [storyboard instantiateViewControllerWithIdentifier:@"gameListViewController"];
-    //GameListViewController *gameList = [[GameListViewController alloc] init];
-    //[gameList.view setFrame:self.window.frame];
-    //gameList.view.backgroundColor = BIGreen;
-    UITabBarItem *gameListTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Games" image:[UIImage imageNamed:@"play-button-icon-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    UITabBarItem *gameListTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Games" image:[UIImage imageNamed:@"play-toolbar-icon.png"] selectedImage:[UIImage imageNamed:@"boxedIn-toolbar-icon.png"]];
     gameList.tabBarItem = gameListTabBarItem;
     
     SettingsViewController *settingsPage = [storyboard instantiateViewControllerWithIdentifier:@"settingsViewController"];
-    //SettingsViewController *settingsPage = [[SettingsViewController alloc] init];
-    //[settingsPage.view setFrame:self.window.frame];
-    //settingsPage.view.backgroundColor = BIOrange;
-    UITabBarItem *settingsPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:[UIImage imageNamed:@"mind_map-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-app-icon-50-with-alpha.png"]];
+    UITabBarItem *settingsPageTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:[UIImage imageNamed:@"mind_map-50.png"] selectedImage:[UIImage imageNamed:@"boxedIn-toolbar-icon.png"]];
     settingsPage.tabBarItem = settingsPageTabBarItem;
     
     _tabBarController = [[JDMinimalTabBarController alloc] init];
+    [_tabBarController.view setFrame:self.window.frame];
     
-    [self.window addSubview:frontPage.view];
-    [self.window addSubview:infoPage.view];
-    [self.window addSubview:settingsPage.view];
-    [self.window addSubview:friendList.view];
-    [self.window addSubview:gameList.view];
     [self.window setRootViewController:_tabBarController];
     
-    _tabBarController.minimalBar.defaultTintColor = BIGreen;
+    _tabBarController.minimalBar.defaultTintColor = BIOrange;
     _tabBarController.minimalBar.selectedTintColor = BIDarkGrey;//[UIColor colorWithRed:222.0f/255.f green:157.0f/255.f blue:0.0f/255.f alpha:1.f];
     _tabBarController.minimalBar.showTitles = YES;
     _tabBarController.minimalBar.hidesTitlesWhenSelected = YES;
     _tabBarController.minimalBar.backgroundColor = [UIColor clearColor];
-    [_tabBarController setViewControllers:@[infoPage, frontPage, settingsPage, friendList, gameList]];
+    
+    NSArray *vcArray = [[NSArray alloc] initWithObjects:frontPage, gameList, friendList, settingsPage, infoPage, nil];
+    [_tabBarController setViewControllers:vcArray];
+    
+    
+    
     
     return YES;
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current Installation and save it to Parse
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+    [PFUser currentUser][@"installationId"] = currentInstallation.objectId;
+    [[PFUser currentUser] saveInBackground];
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    //[PFPush handlePush:userInfo];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if (currentInstallation.badge != 0) {
+        currentInstallation.badge = 0;
+        [currentInstallation saveEventually];
+    }
+    
+    if (application.applicationState == UIApplicationStateActive) {
+        if ([self.window.rootViewController isKindOfClass:[GameBoardViewController class]]) {
+            GameBoardViewController *this = (GameBoardViewController*)self.window.rootViewController;
+            if ([this.game.objectId isEqualToString:[userInfo objectForKey:@"g"]]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGameNotification" object:[userInfo objectForKey:@"g"]];
+            }
+        }
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You're turn!" message:[userInfo valueForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            // up up
+        }]];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:^{
+            // up up
+        }];
+    }
+    else {
+        //NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+        NSString *objID = [userInfo objectForKey:@"g"];
+        PFObject *game = [PFObject objectWithoutDataWithClassName:@"GameBoard" objectId:objID];
+        
+        [game fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            if (!error) {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                GameBoardViewController *gbvc = [storyboard instantiateViewControllerWithIdentifier:@"gameBoardViewController"];
+                gbvc.game = object;
+                [self.window.rootViewController presentViewController:gbvc animated:YES completion:^{
+                    //up up
+                }];
+            }
+        }];
+    }
+    
+}
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    //return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -112,6 +187,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

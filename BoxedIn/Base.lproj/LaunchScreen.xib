@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,22 +13,20 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boxedIn-icon-1024.png" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-EM-WUB">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boxedIn-splash-1024.png" translatesAutoresizingMaskIntoConstraints="NO" id="zXr-EM-WUB">
+                    <rect key="frame" x="48" y="48" width="384" height="384"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="zXr-EM-WUB" secondAttribute="height" multiplier="1:1" id="pBS-2T-nvW"/>
-                        <constraint firstAttribute="width" secondItem="zXr-EM-WUB" secondAttribute="height" multiplier="1:1" id="pXy-K9-2qv"/>
+                        <constraint firstAttribute="width" secondItem="zXr-EM-WUB" secondAttribute="height" multiplier="1:1" id="xzI-hE-Uym"/>
                     </constraints>
                 </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="zXr-EM-WUB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JDn-kY-hIg"/>
-                <constraint firstItem="zXr-EM-WUB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="JiD-hT-P1E"/>
-                <constraint firstAttribute="trailing" secondItem="zXr-EM-WUB" secondAttribute="trailing" id="Xag-KP-GUq"/>
+                <constraint firstItem="zXr-EM-WUB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8Dk-Es-UEW"/>
                 <constraint firstItem="zXr-EM-WUB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kxn-b5-9QN"/>
+                <constraint firstItem="zXr-EM-WUB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="xaI-LS-3qu"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -35,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="boxedIn-icon-1024.png" width="1024" height="1024"/>
+        <image name="boxedIn-splash-1024.png" width="1024" height="1024"/>
     </resources>
 </document>

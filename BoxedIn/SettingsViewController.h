@@ -10,4 +10,14 @@
 
 @interface SettingsViewController : UIViewController
 
+@property(nonatomic,retain) IBOutlet UILabel *userLabel;
+@property(nonatomic,retain) IBOutlet UILabel *gamesPlayedLabel;
+@property(nonatomic,retain) IBOutlet UILabel *gamesWonLabel;
+@property(nonatomic,retain) IBOutlet UILabel *totalBoxesLabel;
+@property(nonatomic,retain) IBOutlet UIButton *connectFbButton;
+
+-(IBAction)connectFBButtonPressed:(id)sender;
+-(IBAction)editButtonPressed:(id)sender;
+-(IBAction)deleteAccountButtonPressed:(id)sender;
+
 @end

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '49850B260E8DF1791EA2C398'
+               BlueprintIdentifier = '61AFBF42C9381181EF7C882E'
                BlueprintName = 'MinimalTabBar'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libMinimalTabBar.a'>

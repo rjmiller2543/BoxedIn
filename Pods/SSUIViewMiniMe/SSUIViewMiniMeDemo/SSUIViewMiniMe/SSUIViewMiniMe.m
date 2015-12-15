@@ -18,9 +18,10 @@
     UIImageView *miniMeImageView;
     UIView *miniMeIndicator;
     NSInteger viewRatio;
+    BOOL hideMiniMe;
 }
 
--(SSUIViewMiniMe *)initWithView:(UIView *)viewToMap withRatio:(NSInteger)ratio
+-(SSUIViewMiniMe *)initWithView:(UIView *)viewToMap withRatio:(NSInteger)ratio withSize:(CGSize)size
 {
     self = [super initWithFrame:viewToMap.frame];
 
@@ -29,11 +30,11 @@
         zoomedView = viewToMap;
         viewRatio = ratio;
         [self setBackgroundColor:[UIColor blackColor]];
-        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
+        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         self.scrollView.contentSize = CGSizeMake(viewToMap.bounds.size.width, viewToMap.bounds.size.height);
         self.scrollView.delegate = self;
-        self.scrollView.minimumZoomScale = 1;
-        self.scrollView.maximumZoomScale = 20;
+        self.scrollView.minimumZoomScale = 0.25;
+        self.scrollView.maximumZoomScale = 1;
         [self.scrollView setBounces:NO];
         [self.scrollView addSubview:viewToMap];
 
@@ -74,6 +75,8 @@
         
         miniMeSelectorBtn.clipsToBounds = YES;
         [miniMe addSubview:miniMeSelectorBtn];
+        hideMiniMe = false;
+        [miniMe setHidden:hideMiniMe];
     }
     return self;
 }
@@ -104,7 +107,7 @@
         touchPoint.x = miniMe.frame.size.width - miniMe.frame.size.width/self.scrollView.zoomScale;
     }
     
-    miniMeIndicator.frame = CGRectMake(touchPoint.x, touchPoint.y, miniMe.frame.size.width/self.scrollView.zoomScale, miniMe.frame.size.height/self.scrollView.zoomScale);
+    miniMeIndicator.frame = CGRectMake(touchPoint.x, touchPoint.y, miniMe.frame.size.width/(self.scrollView.zoomScale /10) , miniMe.frame.size.height/(self.scrollView.zoomScale / 10));
     
     [self.scrollView setContentOffset:CGPointMake(touchPoint.x*viewRatio*self.scrollView.zoomScale, touchPoint.y*viewRatio*self.scrollView.zoomScale) animated:NO];
 }
@@ -119,6 +122,8 @@
     if (holdRecognizer.state == UIGestureRecognizerStateBegan)
     {
         NSLog(@"Holding...");
+        hideMiniMe = !hideMiniMe;
+        [miniMe setHidden:hideMiniMe];
     }
     else if (holdRecognizer.state == UIGestureRecognizerStateEnded)
     {
@@ -192,6 +197,29 @@
     }
 }
 
+- (void)centerScrollViewContents {
+    
+    //_containerView.center = CGPointMake(_gameBoardView.frame.size.width / 2.0f, _gameBoardView.frame.size.height / 2.0f);
+    
+    
+    CGSize boundsSize = _scrollView.bounds.size;
+    CGRect contentsFrame = zoomedView.frame;
+    
+    if (contentsFrame.size.width < boundsSize.width) {
+        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+    
+    if (contentsFrame.size.height < boundsSize.height) {
+        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+    
+    zoomedView.frame = contentsFrame;
+    
+}
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
@@ -202,8 +230,9 @@
 {
     miniMeIndicator.frame = CGRectMake(miniMeIndicator.frame.origin.x
                                        , miniMeIndicator.frame.origin.y,
-                                       miniMe.frame.size.width/self.scrollView.zoomScale,
-                                       miniMe.frame.size.height/self.scrollView.zoomScale);
+                                       miniMe.frame.size.width/(self.scrollView.zoomScale / 0.333),
+                                       miniMe.frame.size.height/(self.scrollView.zoomScale / 0.5));
+    [self centerScrollViewContents];
 }
 
 @end

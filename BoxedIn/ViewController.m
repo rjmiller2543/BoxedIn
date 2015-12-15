@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
+#import <Parse.h>
+#import "LoginViewController.h"
 
 @interface ViewController ()
 
@@ -17,6 +20,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    PFUser *user = [PFUser currentUser];
+    if (user == nil) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController *login = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        
+        [self presentViewController:login animated:YES completion:^{
+            //up up
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
