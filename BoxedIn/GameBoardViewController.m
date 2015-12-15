@@ -845,11 +845,15 @@
                 _game[@"playerOneTurn"] = @NO;
             
             _game[@"completed"] = @NO;
-            [_game saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded) {
-                    NSLog(@"succeeded in saving the game..");
-                }
-            }];
+            if (_gameType != NETTYPE) {
+                //only save the game if it's a local or p2p game otherwise we stand to overwrite data
+                [_game saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded) {
+                        NSLog(@"succeeded in saving the game..");
+                    }
+                }];
+            }
+            
             [self dismissViewControllerAnimated:YES completion:^{
                 //up up
                 if (_prevViewController != nil) {
