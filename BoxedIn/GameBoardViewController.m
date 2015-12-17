@@ -1052,6 +1052,7 @@
             senderUser = _game[@"PlayerOne"];
         }
         
+        [SVProgressHUD showWithStatus:@"Saving.."];
         [_game saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 // Find users near a given location
@@ -1080,6 +1081,7 @@
                 [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         NSLog(@"push sent..");
+                        [SVProgressHUD showSuccessWithStatus:@"Saved!"];
                     }
                     else if (error) {
                         NSLog(@"push not sent with error: %@", error);

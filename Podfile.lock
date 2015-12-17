@@ -40,6 +40,7 @@ PODS:
   - pop (1.0.8)
   - SSUIViewMiniMe (1.0.1)
   - SVProgressHUD (1.1.3)
+  - SVPullToRefresh (0.4.1)
   - UIView+FDCollapsibleConstraints (1.1)
   - VBFPopFlatButton (0.0.6):
     - pop
@@ -56,6 +57,7 @@ DEPENDENCIES:
   - ParseFacebookUtils
   - SSUIViewMiniMe
   - SVProgressHUD
+  - SVPullToRefresh
   - UIView+FDCollapsibleConstraints
   - VBFPopFlatButton
 
@@ -76,6 +78,7 @@ SPEC CHECKSUMS:
   pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
   SSUIViewMiniMe: 1bb47a90664737e32d671ca0fbb8e28a3e4f1720
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   UIView+FDCollapsibleConstraints: 9357eaf03b4e088263ab74a3b86a382a64ce38dd
   VBFPopFlatButton: 782344da63f104c279a857d806e065117a7e1196
 

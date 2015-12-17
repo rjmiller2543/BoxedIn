@@ -11,6 +11,7 @@
 #import <Parse.h>
 #import "BoxedInColors.h"
 #import "GameBoardViewController.h"
+#import <SVPullToRefresh.h>
 
 @interface GameListViewController ()
 
@@ -28,6 +29,10 @@
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    __weak typeof(self) weakSelf = self;
+    [_tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshData];
+    }];
     
     _currentGamesArray = [[NSMutableArray alloc] init];
     _previousGamesArray = [[NSMutableArray alloc] init];
@@ -37,6 +42,7 @@
     if (user != nil) {
         NSPredicate *currpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = 0", user, user];
         PFQuery *currquery = [PFQuery queryWithClassName:@"GameBoard" predicate:currpredicate];
+        [currquery orderByDescending:@"updatedAt"];
         [currquery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             [_currentGamesArray removeAllObjects];
             [_currentGamesArray addObjectsFromArray:objects];
@@ -50,6 +56,8 @@
         }];
     }
     
+    NSTimer *timer = [NSTimer timerWithTimeInterval:180.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    [timer fire];
     
     /*
     PFQuery *query = [PFQuery queryWithClassName:@"GameBoard"];
@@ -70,7 +78,7 @@
      */
 }
 
-
+/*
 -(void)viewDidAppear:(BOOL)animated {
     PFUser *user = [PFUser currentUser];
     if (user != nil) {
@@ -100,13 +108,14 @@
     [timer fire];
     //[_tableView reloadData];
 }
+ */
 
 -(void)refreshData {
     PFUser *user = [PFUser currentUser];
     if (user != nil) {
         NSPredicate *currpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = NO", user, user];
         PFQuery *currquery = [PFQuery queryWithClassName:@"GameBoard" predicate:currpredicate];
-        [currquery orderByAscending:@"updatedAt"];
+        [currquery orderByDescending:@"updatedAt"];
         [currquery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             NSLog(@"finished finding curr games");
             if (error) {
@@ -123,6 +132,7 @@
             [_previousGamesArray removeAllObjects];
             [_previousGamesArray addObjectsFromArray:objects];
             [_tableView reloadData];
+            [_tableView.pullToRefreshView stopAnimating];
         }];
     }
 }

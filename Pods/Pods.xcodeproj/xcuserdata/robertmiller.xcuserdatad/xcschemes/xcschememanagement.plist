@@ -84,6 +84,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVPullToRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UIView+FDCollapsibleConstraints.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -107,22 +112,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1DDCEC8C39612E9E7FAB4203762DD632</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>26EDF1145FC391BA7361343AB0236E51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28F888751B5EF28C5388596F1C8194C0</key>
+		<key>2EFEDBB649146422B0A076290AB959DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2EFEDBB649146422B0A076290AB959DE</key>
+		<key>40E7E4EABA7D453D3628AE355F160A34</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40F3390D4CADDF8C68F1975FF1BBE3FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,17 +152,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>913C2EB7B2A5B995031123530CF4D9CD</key>
+		<key>6FCFDFA90CAB330534C654F3AD91BF0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>94CD1C8F66FD669E18E0C48C70DC827D</key>
+		<key>701D595EF32561A4DC3CC6866821C111</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>99220212B2AC6983C77B6F14B07597F7</key>
+		<key>8401F85B42DA1B2321B0488AA9E89425</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -168,6 +173,11 @@
 			<true/>
 		</dict>
 		<key>9F3A3DAF2523F0F6FEC26AC469CD4639</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A198B8B24A11D4925C3CB8C30334E190</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,7 +197,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D98FC16A1EEB3B4D6C1497C6977A9952</key>
+		<key>E9AA59E05EEB6E87DAE9E665FA485170</key>
 		<dict>
 			<key>primary</key>
 			<true/>
