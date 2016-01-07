@@ -25,6 +25,7 @@
 @property(nonatomic,retain) FUITextField *columnsTextField;
 @property(nonatomic,retain) FUITextField *rowsTextField;
 @property(nonatomic,retain) VBFPopFlatButton *saveButton;
+@property(nonatomic,retain) FUISegmentedControl *randomSegment;
 
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
 @property(nonatomic,retain) NSArray *dataSourceArray;

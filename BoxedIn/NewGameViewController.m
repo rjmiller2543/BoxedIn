@@ -15,6 +15,7 @@
 #import "UIImageView+Letters.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "PFObject+Coder.h"
+#import <DVITutorialView.h>
 
 @interface NewGameViewController () <MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UITableViewDataSource, UITableViewDelegate, GameBoardViewControllerDelegate>
 
@@ -28,6 +29,10 @@
 @property(nonatomic) BOOL receivedGame;
 @property(nonatomic,retain) GameBoardViewController *gameBoard;
 @property(nonatomic,retain) PFUser *oppUser;
+
+@property(nonatomic,retain) UITapGestureRecognizer *tapGesture;
+@property(nonatomic) BOOL tutorialComplete;
+@property(nonatomic,retain) NSTimer *randomTimer;
 
 @end
 
@@ -100,6 +105,17 @@
     [rowStepper configureFlatStepperWithColor:BIGreen highlightedColor:BILightGrey disabledColor:BIDarkGrey iconColor:BILightGrey];
     [_gameOptionsView addSubview:rowStepper];
     
+    _randomSegment = [[FUISegmentedControl alloc] initWithItems:@[@"Friends", @"Random"]];
+    [_randomSegment setFrame:CGRectMake(self.view.frame.size.width + self.view.frame.size.width/2, 30, self.view.frame.size.width * 0.75, 30)];
+    [_randomSegment setSelectedColor:BIGreen];
+    [_randomSegment setDeselectedColor:BIDarkGrey];
+    [_randomSegment setSelectedFontColor:BILightGrey];
+    [_randomSegment setDeselectedFontColor:BILightGrey];
+    [_randomSegment setDividerColor:BILightGrey];
+    [_randomSegment setSelectedSegmentIndex:0];
+    [_randomSegment addTarget:self action:@selector(segmentChanged) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:_randomSegment];
+    
     [_cancelButton setNeedsLayout];
     [_cancelButton layoutIfNeeded];
     
@@ -111,6 +127,49 @@
     [_saveButton addTarget:self action:@selector(saveButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     _saveButton.tag = OKTAG;
     [self.view addSubview:_saveButton];
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"FirstTimeNewGame"] boolValue] == false) {
+        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTutorial)];
+        [self.view addGestureRecognizer:_tapGesture];
+    }
+}
+
+-(void)startTutorial {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"FirstTimeNewGame"] boolValue] == false) {
+        if (!_tutorialComplete) {
+            DVITutorialView *tutorialView = [[DVITutorialView alloc] init];
+            [tutorialView addToView:self.view];
+            
+            tutorialView.tutorialStrings = @[
+                                             @"Tap Here to Play a Game between you and your friend on your phone..",
+                                             @"Tap Here to Play a Game between you and someone nearby..",
+                                             @"Tap Here to Play a Game between you and any opponent anywhere or to play a random person..",
+                                             @"Press this button to cancel your new game :,(",
+                                             @"Make your first move!",
+                                             ];
+            
+            tutorialView.tutorialViews = @[
+                                           _localButton,
+                                           _p2pButton,
+                                           _playButton,
+                                           _cancelButton,
+                                           [[UIView alloc] init],
+                                           ];
+            
+            [tutorialView startWithCompletion:^{
+                [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"FirstTimeNewGame"];
+                _tutorialComplete = true;
+                [_tapGesture setEnabled:NO];
+            }];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"FirstTimeNewGame"];
+            [_tapGesture setEnabled:NO];
+        }
+    }
+    else {
+        [_tapGesture setEnabled:NO];
+    }
 }
 
 -(void)viewDidLayoutSubviews {
@@ -173,6 +232,10 @@
         _playLabelYCoordinate = playLabelRect.origin.y;
         playLabelRect.origin.y = _localLabelYCoordinate;
         [_playLabel setFrame:playLabelRect];
+        
+        CGRect randomSegmentRect = _randomSegment.frame;
+        randomSegmentRect.origin.x = self.view.frame.size.width/2 - _randomSegment.frame.size.width/2;
+        [_randomSegment setFrame:randomSegmentRect];
         
         _cancelButtonXCoordinate = _cancelButton.frame.origin.x;
         [_cancelButton animateToType:buttonBackType];
@@ -416,6 +479,9 @@
     [_p2pButton setEnabled:YES];
     [_playButton setEnabled:YES];
     
+    [[PFUser currentUser] setObject:@NO forKey:@"random"];
+    [[PFUser currentUser] saveInBackground];
+    
     [UIView animateWithDuration:0.7 animations:^{
         CGRect localButtonRect = _localButton.frame;
         //_localButtonYCoordinate = localButtonRect.origin.y;
@@ -453,6 +519,10 @@
         [_cancelButton animateToType:buttonCloseType];
         _cancelButton.tag = CANCELTAG;
         
+        CGRect randomSegmentRect = _randomSegment.frame;
+        randomSegmentRect.origin.x = self.view.frame.size.width + self.view.frame.size.width/2;
+        [_randomSegment setFrame:randomSegmentRect];
+        
         if (_saveButton.frame.origin.x < self.view.frame.size.width) {
             CGRect saveButtonRect = _saveButton.frame;
             saveButtonRect.origin.x += self.view.frame.size.width;
@@ -481,6 +551,11 @@
 }
 
 -(void)displayGameOptions {
+    
+    [[PFUser currentUser] setObject:@NO forKey:@"random"];
+    [[PFUser currentUser] saveInBackground];
+    
+    [_randomTimer invalidate];
     
     CGRect yCorrectFrame = _gameOptionsView.frame;
     yCorrectFrame.origin.y = _p2pButtonYCoordinate;
@@ -553,6 +628,49 @@
     PFQuery *query = [PFUser query];
     [query whereKey:@"objectId" containedIn:array];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        [_dataSource addObjectsFromArray:objects];
+        [_tableView reloadData];
+    }];
+}
+
+-(void)segmentChanged {
+    if ([_randomSegment selectedSegmentIndex] == 0) {
+        [[PFUser currentUser] setObject:@NO forKey:@"random"];
+        [[PFUser currentUser] saveInBackground];
+        
+        PFUser *currUser = [PFUser currentUser];
+        NSArray *array = [[NSArray alloc] initWithArray:currUser[@"friendsList"]];
+        
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"objectId" containedIn:array];
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            [_dataSource removeAllObjects];
+            [_dataSource addObjectsFromArray:objects];
+            [_tableView reloadData];
+        }];
+        [_randomTimer invalidate];
+    }
+    else if ([_randomSegment selectedSegmentIndex] == 1) {
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"random" equalTo:@YES];
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            [_dataSource removeAllObjects];
+            [_dataSource addObjectsFromArray:objects];
+            [_tableView reloadData];
+            
+            [[PFUser currentUser] setObject:@YES forKey:@"random"];
+            [[PFUser currentUser] saveInBackground];
+            _randomTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(updateRandom) userInfo:NULL repeats:YES];
+        }];
+    }
+}
+
+-(void)updateRandom {
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"random" equalTo:@YES];
+    [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        [_dataSource removeAllObjects];
         [_dataSource addObjectsFromArray:objects];
         [_tableView reloadData];
     }];

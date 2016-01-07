@@ -19,7 +19,7 @@
 #import "BoxedInColors.h"
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-
+#import "MessagesViewController.h"
 
 @interface AppDelegate ()
 
@@ -60,6 +60,14 @@
         NSError *error = nil;
         _parseUser = [PFUser logInWithUsername:userName password:password error:&error];
         
+    }
+    
+    if ([PFUser currentUser]) {
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0;
+            [currentInstallation saveEventually];
+        }
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -105,8 +113,7 @@
     NSArray *vcArray = [[NSArray alloc] initWithObjects:frontPage, gameList, friendList, settingsPage, infoPage, nil];
     [_tabBarController setViewControllers:vcArray];
     
-    
-    
+    //[UIViewController prepareInterstitialAds];
     
     return YES;
 }
@@ -116,6 +123,10 @@
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
+    if (currentInstallation.badge != 0) {
+        currentInstallation.badge = 0;
+        [currentInstallation saveEventually];
+    }
     [PFUser currentUser][@"installationId"] = currentInstallation.objectId;
     [[PFUser currentUser] saveInBackground];
 }
@@ -129,35 +140,45 @@
     }
     
     if (application.applicationState == UIApplicationStateActive) {
-        if ([self.window.rootViewController isKindOfClass:[GameBoardViewController class]]) {
-            GameBoardViewController *this = (GameBoardViewController*)self.window.rootViewController;
-            if ([this.game.objectId isEqualToString:[userInfo objectForKey:@"g"]]) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGameNotification" object:[userInfo objectForKey:@"g"]];
+        if ([[userInfo objectForKey:@"pushType"] isEqualToString:@"GameNotification"]) {
+            if ([self.window.rootViewController isKindOfClass:[GameBoardViewController class]]) {
+                GameBoardViewController *this = (GameBoardViewController*)self.window.rootViewController;
+                if ([this.game.objectId isEqualToString:[userInfo objectForKey:@"g"]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGameNotification" object:[userInfo objectForKey:@"g"]];
+                }
             }
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You're turn!" message:[userInfo valueForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                // up up
+            }]];
+            [self.window.rootViewController presentViewController:alert animated:YES completion:^{
+                // up up
+            }];
         }
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You're turn!" message:[userInfo valueForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            // up up
-        }]];
-        [self.window.rootViewController presentViewController:alert animated:YES completion:^{
-            // up up
-        }];
+        else if ([[userInfo objectForKey:@"pushType"] isEqualToString:@"MessageNotification"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateMessageNotification" object:userInfo];
+        }
     }
     else {
         //NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-        NSString *objID = [userInfo objectForKey:@"g"];
-        PFObject *game = [PFObject objectWithoutDataWithClassName:@"GameBoard" objectId:objID];
-        
-        [game fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            if (!error) {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                GameBoardViewController *gbvc = [storyboard instantiateViewControllerWithIdentifier:@"gameBoardViewController"];
-                gbvc.game = object;
-                [self.window.rootViewController presentViewController:gbvc animated:YES completion:^{
-                    //up up
-                }];
-            }
-        }];
+        if ([userInfo objectForKey:@"g"] != nil) {
+            NSString *objID = [userInfo objectForKey:@"g"];
+            PFObject *game = [PFObject objectWithoutDataWithClassName:@"GameBoard" objectId:objID];
+            
+            [game fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                if (!error) {
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    GameBoardViewController *gbvc = [storyboard instantiateViewControllerWithIdentifier:@"gameBoardViewController"];
+                    gbvc.game = object;
+                    [self.window.rootViewController presentViewController:gbvc animated:YES completion:^{
+                        //up up
+                    }];
+                }
+            }];
+        }
+        else if ([userInfo objectForKey:@"message"]) {
+           
+        }
     }
     
 }

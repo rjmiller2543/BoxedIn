@@ -10,8 +10,9 @@
 #import <FlatUIKit.h>
 #import "NewGameViewController.h"
 #import <MZFormSheetController.h>
+#import "MessagesViewController.h"
 
-@interface FriendPageViewController ()
+@interface FriendPageViewController () <MessagesViewControllerDelegate>
 
 @property(nonatomic) BOOL connectedToUser;
 
@@ -60,7 +61,14 @@
 }
 
 -(void)messageButtonPressed:(id)sender {
+    MessagesViewController *messageViewController = [[MessagesViewController alloc] init];
+    [messageViewController setOppUser:_friendUser];
     
+    messageViewController.delegateModal = self;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:messageViewController];
+    [self presentViewController:nav animated:YES completion:^{
+        //up up
+    }];
 }
 
 -(void)newGameButtonPressed:(id)sender {
@@ -68,6 +76,12 @@
     NewGameViewController *newGame = [storyboard instantiateViewControllerWithIdentifier:@"newGameViewController"];
     [self presentViewController:newGame animated:YES completion:^{
         [newGame setupFriendGame:_friendUser];
+    }];
+}
+
+-(void)didDismissJSQDemoViewController:(MessagesViewController *)vc {
+    [self dismissViewControllerAnimated:YES completion:^{
+        //up up
     }];
 }
 

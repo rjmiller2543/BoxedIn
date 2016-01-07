@@ -57,6 +57,7 @@
 		50C23C0B1BE9A589009E40BC /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0A1BE9A589009E40BC /* play-button.png */; };
 		50C23C0D1BE9A595009E40BC /* friends-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0C1BE9A595009E40BC /* friends-button.png */; };
 		50C23C0F1BE9A5A0009E40BC /* settings-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C23C0E1BE9A5A0009E40BC /* settings-button.png */; };
+		50CB69E81C3C478200D3DE62 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CB69E71C3C478200D3DE62 /* StoreKit.framework */; };
 		50E682461BE79E03001EDFBA /* boxedIn-app-icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */; };
 		50E682491BE79EC6001EDFBA /* boxedIn-app-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */; };
 		50E6824A1BE79EC6001EDFBA /* boxedIn-app-icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */; };
@@ -66,6 +67,8 @@
 		50ECC2A51BD51E5F00A6E9F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50ECC2A41BD51E5F00A6E9F3 /* Images.xcassets */; };
 		50ECC2A81BD51E5F00A6E9F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50ECC2A61BD51E5F00A6E9F3 /* LaunchScreen.xib */; };
 		50ECC2B41BD51E5F00A6E9F3 /* BoxedInTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ECC2B31BD51E5F00A6E9F3 /* BoxedInTests.m */; };
+		50F1BAC41C3AC58700E6FC21 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F1BAC31C3AC58700E6FC21 /* iAd.framework */; };
+		50F1BAC71C3AD35D00E6FC21 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1BAC61C3AD35D00E6FC21 /* MessagesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +149,7 @@
 		50C23C0A1BE9A589009E40BC /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
 		50C23C0C1BE9A595009E40BC /* friends-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends-button.png"; sourceTree = "<group>"; };
 		50C23C0E1BE9A5A0009E40BC /* settings-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button.png"; sourceTree = "<group>"; };
+		50CB69E71C3C478200D3DE62 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		50E682451BE79E03001EDFBA /* boxedIn-app-icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-1024.png"; sourceTree = "<group>"; };
 		50E682471BE79EC6001EDFBA /* boxedIn-app-icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-120.png"; sourceTree = "<group>"; };
 		50E682481BE79EC6001EDFBA /* boxedIn-app-icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boxedIn-app-icon-180.png"; sourceTree = "<group>"; };
@@ -161,6 +165,9 @@
 		50ECC2B21BD51E5F00A6E9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50ECC2B31BD51E5F00A6E9F3 /* BoxedInTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxedInTests.m; sourceTree = "<group>"; };
 		50ECC2BD1BD5203D00A6E9F3 /* BoxedInColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxedInColors.h; sourceTree = "<group>"; };
+		50F1BAC31C3AC58700E6FC21 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		50F1BAC51C3AD35D00E6FC21 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		50F1BAC61C3AD35D00E6FC21 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		6F2349C0E9C4687E6C2638ED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8F2DC43E27BC668991726707 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -170,7 +177,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50F1BAC41C3AC58700E6FC21 /* iAd.framework in Frameworks */,
 				506B2B501BFC113200F96268 /* MultipeerConnectivity.framework in Frameworks */,
+				50CB69E81C3C478200D3DE62 /* StoreKit.framework in Frameworks */,
 				506B2B4E1BFC0F2500F96268 /* GameKit.framework in Frameworks */,
 				0728F68E36D7FD309593C66E /* libPods.a in Frameworks */,
 			);
@@ -249,6 +258,8 @@
 				506B2B4A1BF4E6A600F96268 /* LoginViewController.m */,
 				506B2B511BFFAB7400F96268 /* NewFriendGameViewController.h */,
 				506B2B521BFFAB7400F96268 /* NewFriendGameViewController.m */,
+				50F1BAC51C3AD35D00E6FC21 /* MessagesViewController.h */,
+				50F1BAC61C3AD35D00E6FC21 /* MessagesViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -356,6 +367,8 @@
 		5C2D848774B953A96F3EFE17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50CB69E71C3C478200D3DE62 /* StoreKit.framework */,
+				50F1BAC31C3AC58700E6FC21 /* iAd.framework */,
 				506B2B4F1BFC113200F96268 /* MultipeerConnectivity.framework */,
 				506B2B4D1BFC0F2500F96268 /* GameKit.framework */,
 				8F2DC43E27BC668991726707 /* libPods.a */,
@@ -426,6 +439,9 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = G98XDUC443;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -568,6 +584,7 @@
 				506B2B371BF3779000F96268 /* GBButton.m in Sources */,
 				506B2AE01BEBB5E700F96268 /* GameListViewController.m in Sources */,
 				506B2B341BF3777200F96268 /* GBCoordinate.m in Sources */,
+				50F1BAC71C3AD35D00E6FC21 /* MessagesViewController.m in Sources */,
 				506B2B1B1BED347500F96268 /* GameCell.m in Sources */,
 				506B2AE91BEBB61100F96268 /* FriendPageViewController.m in Sources */,
 				506B2B471BF4DB9000F96268 /* UIImageView+Letters.m in Sources */,

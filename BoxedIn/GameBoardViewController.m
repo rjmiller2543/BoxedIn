@@ -14,14 +14,17 @@
 #import "UIImageView+Letters.h"
 #import "NewGameViewController.h"
 #import <SVProgressHUD.h>
+#import <iAd/iAd.h>
+#import "MessagesViewController.h"
+#import <DVITutorialView.h>
 
-@interface GameBoardViewController ()
+@interface GameBoardViewController () <MessagesViewControllerDelegate>
 
 @property(nonatomic,retain) NSString *playerOneLetter;
 @property(nonatomic,retain) NSString *playerTwoLetter;
 
 @property(nonatomic,retain) VBFPopFlatButton *playBoxButton;
-@property(nonatomic,retain) VBFPopFlatButton *messageButton;
+//@property(nonatomic,retain) VBFPopFlatButton *messageButton;
 @property(nonatomic,retain) GBButton *currentButton;
 
 @property(nonatomic,retain) UIView *containerView;
@@ -33,6 +36,10 @@
 @property(nonatomic,retain) NSMutableArray *coordinates;
 @property(nonatomic,retain) NSMutableArray *playerOneBoxes;
 @property(nonatomic,retain) NSMutableArray *playerTwoBoxes;
+
+@property(nonatomic,retain) PFUser *oppUser;
+
+@property(nonatomic) BOOL tutorialComplete;
 
 -(void)centerScrollViewContents;
 
@@ -68,6 +75,9 @@
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"UpdateGameNotification" object:nil];
     
+    [self setInterstitialPresentationPolicy:ADInterstitialPresentationPolicyManual];
+    [UIViewController prepareInterstitialAds];
+    
     [SVProgressHUD showWithStatus:@"Updating Game Board.."];
     [_game fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         [self updateDataPoints];
@@ -76,8 +86,8 @@
     [self.navigationController.navigationBar configureFlatNavigationBarWithColor:BIGreen];
     BOOL goodArray = true;
     
-    _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
-    [_containerView addGestureRecognizer:_tapGesture];
+    //_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
+    //[_containerView addGestureRecognizer:_tapGesture];
     
     _playerOneBoxes = [[NSMutableArray alloc] init];
     _playerTwoBoxes = [[NSMutableArray alloc] init];
@@ -347,7 +357,53 @@
     _hideMini = false;
     [_miniContainer setHidden:_hideMini];
     [_gameBoardView addSubview:_miniContainer];
-     
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"FirstTimeGameBoard"] boolValue] == false) {
+        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTutorial)];
+        [self.view addGestureRecognizer:_tapGesture];
+    }
+}
+
+-(void)startTutorial {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"FirstTimeGameBoard"] boolValue] == false) {
+        if (!_tutorialComplete) {
+            DVITutorialView *tutorialView = [[DVITutorialView alloc] init];
+            [tutorialView addToView:self.view];
+            
+            tutorialView.tutorialStrings = @[
+                                             @"On the game board, select the line you want to pick..",
+                                             @"Tap and Hold to remove the Mini View..",
+                                             @"Pinch to zoom in and out of the game board..",
+                                             @"When the button is a check mark, tap to make your move..",
+                                             @"When the button is an X, you can exit the game board..",
+                                             @"You can also message your opponent by tapping their score board..",
+                                             @"Make your first move!",
+                                             ];
+            
+            tutorialView.tutorialViews = @[
+                                           _gameBoardView,
+                                           _gameBoardView,
+                                           _gameBoardView,
+                                           _playBoxButton,
+                                           _playBoxButton,
+                                           _messageButton,
+                                           [[UIView alloc] init],
+                                           ];
+            
+            [tutorialView startWithCompletion:^{
+                [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"FirstTimeGameBoard"];
+                _tutorialComplete = true;
+                [_tapGesture setEnabled:NO];
+            }];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"FirstTimeGameBoard"];
+            [_tapGesture setEnabled:NO];
+        }
+    }
+    else {
+        [_tapGesture setEnabled:NO];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -844,7 +900,10 @@
             else
                 _game[@"playerOneTurn"] = @NO;
             
-            _game[@"completed"] = @NO;
+            if (_totalMovesRemaining != 0) {
+                _game[@"completed"] = @NO;
+            }
+            
             if (_gameType != NETTYPE) {
                 //only save the game if it's a local or p2p game otherwise we stand to overwrite data
                 [_game saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -869,10 +928,6 @@
         case PLAYTAG: {
             _playBoxButton.tag = CLOSETAG;
             [_playBoxButton animateToType:buttonCloseType];
-            _totalMovesRemaining--;
-            if (_totalMovesRemaining == 0) {
-                [self checkForWinner];
-            }
             
             [_currentButton setEnabled:NO];
             _currentButton.alpha = 1.0;
@@ -888,6 +943,14 @@
             switch (box) {
                 case 0x0:
                     [self finishTurn];
+                    if (_gameType == NETTYPE) {
+                        if (([[PFUser currentUser][@"paidUser"] boolValue] == true) || [[[NSUserDefaults standardUserDefaults] objectForKey:@"paidUser"] boolValue] == true) {
+                            //do not show the ad
+                            NSLog(@"paid user.. do not show the ad");
+                        }
+                        else
+                            [self requestInterstitialAdPresentation];
+                    }
                     break;
                 case 0x1: {
                     NSLog(@"box completed");
@@ -914,6 +977,11 @@
                 case 0x2: {
                     NSLog(@"box completed");
                     if (_playerOneTurn) {
+                        PFUser *user = _game[@"PlayerOne"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes++;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        
                         GBCoordinate *newCoordinate = [GBCoordinate new];
                         newCoordinate.xCoordinate = [NSNumber numberWithInt:coordinate.xCoordinate.intValue - 1];
                         newCoordinate.yCoordinate = coordinate.yCoordinate;
@@ -923,6 +991,53 @@
                         [self makeBox:newCoordinate];
                     }
                     else {
+                        PFUser *user = _game[@"PlayerTwo"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes++;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        
+                        GBCoordinate *newCoordinate = [GBCoordinate new];
+                        newCoordinate.xCoordinate = [NSNumber numberWithInt:coordinate.xCoordinate.intValue - 1];
+                        newCoordinate.yCoordinate = coordinate.yCoordinate;
+                        newCoordinate.vertical = coordinate.vertical;
+                        newCoordinate.highlighted = coordinate.highlighted;
+                        [_playerTwoBoxes addObject:newCoordinate];
+                        [self makeBox:newCoordinate];
+                    }
+                    break;
+                }
+                case 0x3: {
+                    NSLog(@"box completed");
+                    if (_playerOneTurn) {
+                        //int score = [_opponentScoreLabel.text intValue];
+                        //score++;
+                        PFUser *user = _game[@"PlayerOne"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes+=2;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
+                        [_playerOneBoxes addObject:coordinate];
+                        [self makeBox:coordinate];
+                        
+                        GBCoordinate *newCoordinate = [GBCoordinate new];
+                        newCoordinate.xCoordinate = [NSNumber numberWithInt:coordinate.xCoordinate.intValue - 1];
+                        newCoordinate.yCoordinate = coordinate.yCoordinate;
+                        newCoordinate.vertical = coordinate.vertical;
+                        newCoordinate.highlighted = coordinate.highlighted;
+                        [_playerOneBoxes addObject:newCoordinate];
+                        [self makeBox:newCoordinate];
+                    }
+                    else {
+                        PFUser *user = _game[@"PlayerTwo"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes+=2;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
+                        [_playerTwoBoxes addObject:coordinate];
+                        [self makeBox:coordinate];
+                        
                         GBCoordinate *newCoordinate = [GBCoordinate new];
                         newCoordinate.xCoordinate = [NSNumber numberWithInt:coordinate.xCoordinate.intValue - 1];
                         newCoordinate.yCoordinate = coordinate.yCoordinate;
@@ -936,10 +1051,22 @@
                 case 0x4: {
                     NSLog(@"box completed");
                     if (_playerOneTurn) {
+                        PFUser *user = _game[@"PlayerOne"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes++;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
                         [_playerOneBoxes addObject:coordinate];
                         [self makeBox:coordinate];
                     }
                     else {
+                        PFUser *user = _game[@"PlayerTwo"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes++;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
                         [_playerTwoBoxes addObject:coordinate];
                         [self makeBox:coordinate];
                     }
@@ -948,6 +1075,12 @@
                 case 0x8: {
                     NSLog(@"box completed");
                     if (_playerOneTurn) {
+                        PFUser *user = _game[@"PlayerOne"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes++;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
                         GBCoordinate *newCoordinate = [GBCoordinate new];
                         newCoordinate.xCoordinate = coordinate.xCoordinate;
                         newCoordinate.yCoordinate = [NSNumber numberWithInt:coordinate.yCoordinate.intValue - 1];
@@ -957,6 +1090,52 @@
                         [self makeBox:newCoordinate];
                     }
                     else {
+                        PFUser *user = _game[@"PlayerTwo"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes++;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
+                        GBCoordinate *newCoordinate = [GBCoordinate new];
+                        newCoordinate.xCoordinate = coordinate.xCoordinate;
+                        newCoordinate.yCoordinate = [NSNumber numberWithInt:coordinate.yCoordinate.intValue - 1];
+                        newCoordinate.vertical = coordinate.vertical;
+                        newCoordinate.highlighted = coordinate.highlighted;
+                        [_playerTwoBoxes addObject:newCoordinate];
+                        [self makeBox:newCoordinate];
+                    }
+                    break;
+                }
+                case 0xc: {
+                    NSLog(@"box completed");
+                    if (_playerOneTurn) {
+                        PFUser *user = _game[@"PlayerOne"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes+=2;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
+                        [_playerOneBoxes addObject:coordinate];
+                        [self makeBox:coordinate];
+                        
+                        GBCoordinate *newCoordinate = [GBCoordinate new];
+                        newCoordinate.xCoordinate = coordinate.xCoordinate;
+                        newCoordinate.yCoordinate = [NSNumber numberWithInt:coordinate.yCoordinate.intValue - 1];
+                        newCoordinate.vertical = coordinate.vertical;
+                        newCoordinate.highlighted = coordinate.highlighted;
+                        [_playerOneBoxes addObject:newCoordinate];
+                        [self makeBox:newCoordinate];
+                    }
+                    else {
+                        PFUser *user = _game[@"PlayerTwo"];
+                        int totalBoxes = [user[@"totalBoxes"] intValue];
+                        totalBoxes+=2;
+                        user[@"totalBoxes"] = [NSNumber numberWithInt:totalBoxes];
+                        [user saveInBackground];
+                        
+                        [_playerTwoBoxes addObject:coordinate];
+                        [self makeBox:coordinate];
+                        
                         GBCoordinate *newCoordinate = [GBCoordinate new];
                         newCoordinate.xCoordinate = coordinate.xCoordinate;
                         newCoordinate.yCoordinate = [NSNumber numberWithInt:coordinate.yCoordinate.intValue - 1];
@@ -970,6 +1149,10 @@
                     
                 default:
                     break;
+            }
+            _totalMovesRemaining--;
+            if (_totalMovesRemaining == 0) {
+                [self checkForWinner];
             }
             break;
         }
@@ -1072,6 +1255,7 @@
                 message = [message stringByAppendingString:@"!"];
                 NSDictionary *data = @{
                                        @"alert" : message,
+                                       @"pushType" : @"GameNotification",
                                        @"g" : _game.objectId,
                                        @"badge" : @"Increment",
                                        @"sounds" : @"default"
@@ -1172,7 +1356,34 @@
 }
 
 -(void)checkForWinner {
-    
+    if (_playerOneBoxes.count > _playerTwoBoxes.count) {
+        NSString *title = _opponentUserLabel.text;
+        title = [title stringByAppendingString:@" Wins!!"];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:@"WooHoo!" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //up up
+        }]];
+        [self presentViewController:alert animated:YES completion:^{
+            //up up
+        }];
+        [_game setObject:@YES forKey:@"winner"];
+        [_game setObject:@YES forKey:@"completed"];
+    }
+    else {
+        NSString *title = _myUserLabel.text;
+        title = [title stringByAppendingString:@" Wins!!"];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:@"WooHoo!" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //up up
+        }]];
+        [self presentViewController:alert animated:YES completion:^{
+            //up up
+        }];
+        [_game setObject:@NO forKey:@"winner"];
+        [_game setObject:@YES forKey:@"completed"];
+    }
+    [_game setObject:@YES forKey:@"completed"];
+    [_game saveInBackground];
 }
 
 -(void)receiveNotification:(NSNotification*)notification {
@@ -1191,6 +1402,32 @@
 
 -(void)screenTapped:(id)sender {
     [_miniContainer setHidden:!_hideMini];
+}
+
+-(void)openMessenger:(id)sender {
+    
+    if (_gameType != LOCALTYPE) {
+        MessagesViewController *messageViewController = [[MessagesViewController alloc] init];
+        if ([_game[@"PlayerOne"] isEqual:[PFUser currentUser]]) {
+            [messageViewController setOppUser:_game[@"PlayerTwo"]];
+        }
+        else {
+            [messageViewController setOppUser:_game[@"PlayerOne"]];
+        }
+        
+        messageViewController.delegateModal = self;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:messageViewController];
+        [self presentViewController:nav animated:YES completion:^{
+            //up up
+        }];
+    }
+    
+}
+
+-(void)didDismissJSQDemoViewController:(MessagesViewController *)vc {
+    [self dismissViewControllerAnimated:YES completion:^{
+        //up up
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

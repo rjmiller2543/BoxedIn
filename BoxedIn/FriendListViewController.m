@@ -14,10 +14,13 @@
 #import "FriendPageViewController.h"
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <DVITutorialView.h>
 
 @interface FriendListViewController ()
 
 @property(nonatomic,retain) NSMutableArray *dataSource;
+@property(nonatomic) BOOL tutorialComplete;
+@property(nonatomic,retain) UITapGestureRecognizer *tapGesture;
 
 @end
 
@@ -27,6 +30,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"UpdateUserInformation" object:nil];
+    _searchBar.tag = 1001;
+    _tutorialComplete = false;
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -70,6 +75,50 @@
         }];
     }
     
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"FirstTimeFriendList"] boolValue] == false) {
+        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTutorial)];
+        [self.view addGestureRecognizer:_tapGesture];
+    }
+    
+}
+
+-(void)viewDidLayoutSubviews {
+    //_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTutorial)];
+    //[self.view addGestureRecognizer:_tapGesture];
+    
+    
+}
+
+-(void)startTutorial {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"FirstTimeFriendList"] boolValue] == false) {
+        if (!_tutorialComplete) {
+            DVITutorialView *tutorialView = [[DVITutorialView alloc] init];
+            [tutorialView addToView:self.view];
+            
+            tutorialView.tutorialStrings = @[
+                                             @"Tap the Search Bar to Filter, Find, and Add Friends..",
+                                             @"Get Started!",
+                                             ];
+            
+            tutorialView.tutorialViews = @[
+                                           _searchBar,
+                                           [[UIView alloc] init],
+                                           ];
+            
+            [tutorialView startWithCompletion:^{
+                [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"FirstTimeFriendList"];
+                _tutorialComplete = true;
+                [_tapGesture setEnabled:NO];
+            }];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"FirstTimeFriendList"];
+            [_tapGesture setEnabled:NO];
+        }
+    }
+    else {
+        [_tapGesture setEnabled:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,7 +131,7 @@
     
     PFUser *user = [_dataSource objectAtIndex:indexPath.row];
     cell.friendLabel.text = [user username];
-    cell.friendScore.text = user[@"totalWins"];
+    cell.friendScore.text = [user[@"totalWins"] stringValue];
     [cell.imageView setImageWithString:@"P" color:BIDarkGrey];
     
     return cell;

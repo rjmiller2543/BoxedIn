@@ -13,9 +13,12 @@
 #import <Facebook-iOS-SDK/FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
 #import <FBSDKCoreKit.h>
+#import <StoreKit/StoreKit.h>
 //#import <FBSDKLoginKit.h>
 
-@interface SettingsViewController ()
+#define kRemoveAdsProductIdentifier @"com.BoxedIn_Ad_Removal"
+
+@interface SettingsViewController () <SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 @end
 
@@ -29,9 +32,9 @@
     PFUser *user = [PFUser currentUser];
     
     _userLabel.text = user.username;
-    _gamesPlayedLabel.text = user[@"gamesPlayed"];
-    _gamesWonLabel.text = user[@"gamesWon"];
-    _totalBoxesLabel.text = user[@"totalBoxes"];
+    _gamesPlayedLabel.text = [user[@"gamesPlayed"] stringValue];
+    _gamesWonLabel.text = [user[@"gamesWon"] stringValue];
+    _totalBoxesLabel.text = [user[@"totalBoxes"] stringValue];
     
 }
 
@@ -51,9 +54,9 @@
     PFUser *user = [PFUser currentUser];
     
     _userLabel.text = user.username;
-    _gamesPlayedLabel.text = user[@"gamesPlayed"];
-    _gamesWonLabel.text = user[@"gamesWon"];
-    _totalBoxesLabel.text = user[@"totalBoxes"];
+    _gamesPlayedLabel.text = [user[@"gamesPlayed"] stringValue];
+    _gamesWonLabel.text = [user[@"gamesWon"] stringValue];
+    _totalBoxesLabel.text = [user[@"totalBoxes"] stringValue];
     
     [user fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (![PFFacebookUtils isLinkedWithUser:user]) {
@@ -178,6 +181,91 @@
             [self updateUserPage];
         }];
     }
+}
+
+-(void)donateCash:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thank you!" message:@"Ads will be removed if you send a donation for $4.99.." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Donate!" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //store kit code
+        if ([SKPaymentQueue canMakePayments]) {
+            NSLog(@"User can make payments");
+            
+            SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kRemoveAdsProductIdentifier]];
+            productsRequest.delegate = self;
+            [productsRequest start];
+        }
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Nevermind.." style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //up up
+    }]];
+    [self presentViewController:alert animated:YES completion:^{
+        //up up
+    }];
+}
+
+-(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+    SKProduct *validProduct = nil;
+    int count = [response.products count];
+    if (count > 0) {
+        validProduct = [response.products objectAtIndex:0];
+        NSLog(@"Products available");
+        [self purchase:validProduct];
+    }
+    else if (!validProduct) {
+        NSLog(@"No products available");
+    }
+}
+
+-(void)purchase:(SKProduct*)product {
+    SKPayment *payment = [SKPayment paymentWithProduct:product];
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+}
+
+-(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    NSLog(@"received restored transactions: %i", queue.transactions.count);
+    for (SKPaymentTransaction *transaction in queue.transactions) {
+        NSLog(@"transaction state -> restored");
+        
+        //
+        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+        break;
+    }
+}
+
+-(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions {
+    for (SKPaymentTransaction *transaction in transactions) {
+        switch (transaction.transactionState) {
+            case SKPaymentTransactionStatePurchasing:
+                NSLog(@"purchasing...");
+                break;
+            case SKPaymentTransactionStatePurchased:
+                NSLog(@"purchased");
+                [self doRemoveAds];
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateRestored:
+                NSLog(@"restored");
+                break;
+            case SKPaymentTransactionStateFailed:
+                NSLog(@"payment failed..");
+                if (transaction.error.code == SKErrorPaymentCancelled) {
+                    NSLog(@"payment cancelled");
+                }
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+-(void)doRemoveAds {
+    [[PFUser currentUser] setObject:@YES forKey:@"paidUser"];
+    [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"paidUser"];
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (void)didReceiveMemoryWarning {

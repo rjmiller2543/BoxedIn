@@ -19,5 +19,6 @@
 -(IBAction)connectFBButtonPressed:(id)sender;
 -(IBAction)editButtonPressed:(id)sender;
 -(IBAction)deleteAccountButtonPressed:(id)sender;
+-(IBAction)donateCash:(id)sender;
 
 @end

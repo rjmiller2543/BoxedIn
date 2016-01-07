@@ -21,6 +21,7 @@
 @property(nonatomic,retain) IBOutlet UILabel *myUserLabel;
 @property(nonatomic,retain) IBOutlet UILabel *myScoreLabel;
 @property(nonatomic,retain) IBOutlet UIScrollView *gameBoardView;
+@property(nonatomic,retain) IBOutlet UIButton *messageButton;
 
 @property(nonatomic,retain) UITapGestureRecognizer *tapGesture;
 
@@ -33,6 +34,7 @@
 
 -(void)setupGameBoard;
 -(void)updateDataPoints;
+-(IBAction)openMessenger:(id)sender;
 
 @end
 

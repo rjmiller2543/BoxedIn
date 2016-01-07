@@ -114,7 +114,7 @@
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 //up up
             }]];
-            [self presentViewController:alert animated:YES completion:^{
+            [[self presentingViewController] presentViewController:alert animated:YES completion:^{
                 // up up
             }];
             return;
@@ -140,6 +140,9 @@
                     [PFUser currentUser][@"installationId"] = currentInstallation.objectId;
                     [[PFUser currentUser] saveInBackground];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInformation" object:nil];
+                    [[self presentingViewController] dismissViewControllerAnimated:YES completion:^{
+                        //up up
+                    }];
                 }
             }];
             
@@ -148,18 +151,29 @@
             PFUser *user = [PFUser user];
             user.username = userName;
             user.password = _passwordTextField.text;
+            
+            
             [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     NSLog(@"signed up!");
-                    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-                    user[@"installationId"] = currentInstallation.objectId;
-                    [user saveInBackground];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInformation" object:nil];
-                    [[NSUserDefaults standardUserDefaults] setValue:userName forKey:@"UserName"];
-                    [[NSUserDefaults standardUserDefaults] setValue:_passwordTextField.text forKey:@"Password"];
-                    [[AppDelegate sharedInstance] setParseUser:user];
-                    [self dismissViewControllerAnimated:YES completion:^{
+                    
+                    //[[[self presentingViewController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
                         // up up
+                    //}];
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        //PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                        //[user setObject:currentInstallation.objectId forKey:@"installationId"];
+                        //[user saveInBackground];
+                        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                        [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                            user[@"installationId"] = currentInstallation.objectId;
+                            [user saveInBackground];
+                        }];
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInformation" object:nil];
+                        [[NSUserDefaults standardUserDefaults] setValue:userName forKey:@"UserName"];
+                        [[NSUserDefaults standardUserDefaults] setValue:_passwordTextField.text forKey:@"Password"];
+                        [[AppDelegate sharedInstance] setParseUser:user];
                     }];
                     
                 }

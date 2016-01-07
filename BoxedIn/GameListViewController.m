@@ -56,7 +56,7 @@
         }];
     }
     
-    NSTimer *timer = [NSTimer timerWithTimeInterval:180.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:180.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
     [timer fire];
     
     /*

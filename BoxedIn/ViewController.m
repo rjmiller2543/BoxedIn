@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import <Parse.h>
 #import "LoginViewController.h"
+#import <iAd/iAd.h>
 
 @interface ViewController ()
 
@@ -20,7 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    //ADInterstitialAd *ad = [[ADInterstitialAd alloc] init];
+    //[self setInterstitialPresentationPolicy:ADInterstitialPresentationPolicyManual];
+    //[UIViewController prepareInterstitialAds];
+    //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    //    [self requestInterstitialAdPresentation];
+    //});
+    //[self requestInterstitialAdPresentation];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
