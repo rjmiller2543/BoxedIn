@@ -15,5 +15,6 @@
 
 -(IBAction)facebookButtonPressed:(id)sender;
 -(IBAction)passwordButtonPressed:(id)sender;
+-(IBAction)forgotPasswordButtonPressed:(id)sender;
 
 @end

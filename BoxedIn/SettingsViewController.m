@@ -31,6 +31,7 @@
     
     PFUser *user = [PFUser currentUser];
     
+    [_connectFbButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     _userLabel.text = user.username;
     _gamesPlayedLabel.text = [user[@"gamesPlayed"] stringValue];
     _gamesWonLabel.text = [user[@"gamesWon"] stringValue];

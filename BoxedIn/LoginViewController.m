@@ -103,14 +103,23 @@
                     
                     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         if (!error) {
-                            PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-                            user[@"installationId"] = currentInstallation.objectId;
-                            user.username = _userNameTextField.text;
-                            [user setObject:[result objectForKey:@"id"] forKey:@"fbID"];
-                            [user saveInBackground];
                             [self dismissViewControllerAnimated:YES completion:^{
-                                //up up
-                                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInformation" object:nil];
+                                //PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                                //[user setObject:currentInstallation.objectId forKey:@"installationId"];
+                                //[user saveInBackground];
+                                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                                [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                    user[@"installationId"] = currentInstallation.objectId;
+                                    
+                                    user.username = _userNameTextField.text;
+                                    [user setObject:[result objectForKey:@"id"] forKey:@"fbID"];
+                                    [user saveInBackground];
+                                    [self dismissViewControllerAnimated:YES completion:^{
+                                        //up up
+                                        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInformation" object:nil];
+                                    }];
+                                    
+                                }];
                             }];
                         }
                     }];
@@ -123,8 +132,15 @@
         {
             NSLog(@"not checking...");
             NSLog(@"checking...");
-            FUIAlertView *alert = [[FUIAlertView alloc] initWithTitle:@"Invalid User Name" message:@"Your username must begin with a letter..  Use a different username and try again.." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid User Name" message:@"Your username must begin with a letter.. Use a different username and try again.." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                // up up
+            }]];
+            [self presentViewController:alert animated:YES completion:^{
+                // upup
+            }];
+            //FUIAlertView *alert = [[FUIAlertView alloc] initWithTitle:@"Invalid User Name" message:@"Your username must begin with a letter..  Use a different username and try again.." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            //[alert show];
             return;
             
         }
@@ -179,8 +195,15 @@
             //user.password = _passwordTextField.text;
             [PFUser logInWithUsernameInBackground:userName password:_passwordTextField.text block:^(PFUser * _Nullable user, NSError * _Nullable error) {
                 if (error) {
-                    FUIAlertView *alert = [[FUIAlertView alloc] initWithTitle:@"User Name used" message:@"The username you chose has already been taken or the password is wrong..  Try another" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                    [alert show];
+                    //FUIAlertView *alert = [[FUIAlertView alloc] initWithTitle:@"User Name used" message:@"The username you chose has already been taken or the password is wrong..  Try another" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    //[alert show];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"User Name Used" message:@"The username you chose has already been taken or the password is wrong.. Try another" preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        //up up
+                    }]];
+                    [self presentViewController:alert animated:YES completion:^{
+                        //up up
+                    }];
                 }
                 else {
                     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
@@ -222,7 +245,6 @@
                         [[NSUserDefaults standardUserDefaults] setValue:_passwordTextField.text forKey:@"Password"];
                         [[AppDelegate sharedInstance] setParseUser:user];
                     }];
-                    
                 }
             }];
         }

@@ -16,6 +16,8 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "PFObject+Coder.h"
 #import <DVITutorialView.h>
+#import <PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface NewGameViewController () <MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UITableViewDataSource, UITableViewDelegate, GameBoardViewControllerDelegate>
 
@@ -632,6 +634,34 @@
         [_dataSource addObjectsFromArray:objects];
         [_tableView reloadData];
     }];
+    if ([PFFacebookUtils isLinkedWithUser:currUser]) {
+        // Issue a Facebook Graph API request to get your user's friend list
+        FBSession *session = [[FBSession alloc] initWithPermissions:@[@"public_profile", @"user_friends"]];
+        [FBSession setActiveSession:session];
+        [FBSession openActiveSessionWithAllowLoginUI:NO fromViewController:self];
+        [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            if (!error) {
+                // result will contain an array with your user's friends in the "data" key
+                NSArray *friendObjects = [result objectForKey:@"data"];
+                NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
+                // Create a list of friends' Facebook IDs
+                for (NSDictionary *friendObject in friendObjects) {
+                    [friendIds addObject:[friendObject objectForKey:@"id"]];
+                }
+                
+                // Construct a PFUser query that will find friends whose facebook ids
+                // are contained in the current user's friend list.
+                PFQuery *friendQuery = [PFUser query];
+                [friendQuery whereKey:@"fbID" containedIn:friendIds];
+                
+                // findObjects will return a list of PFUsers that are friends
+                // with the current user
+                NSArray *friendUsers = [friendQuery findObjects];
+                [_dataSource addObjectsFromArray:friendUsers];
+                [_tableView reloadData];
+            }
+        }];
+    }
 }
 
 -(void)segmentChanged {
@@ -680,7 +710,7 @@
 -(void)setupFriendGame:(PFUser*)user {
     
     _oppUser = user;
-    
+    /*
     float moveHeight = self.view.frame.size.height;
     
     _gameType = FRIENDTYPE;
@@ -715,6 +745,53 @@
         playLabelRect.origin.y += moveHeight;
         [_playLabel setFrame:playLabelRect];
         
+    }];
+    */
+    
+    float moveHeight = self.view.frame.size.height;
+    [_localButton setEnabled:NO];
+    [_p2pButton setEnabled:NO];
+    [_playButton setEnabled:NO];
+    
+    _gameType = NETTYPE;
+    [UIView animateWithDuration:0.7 animations:^{
+        CGRect localButtonRect = _localButton.frame;
+        _localButtonYCoordinate = localButtonRect.origin.y;
+        localButtonRect.origin.y -= moveHeight;
+        [_localButton setFrame:localButtonRect];
+        
+        CGRect localLabelRect = _localLabel.frame;
+        _localLabelYCoordinate = localLabelRect.origin.y;
+        localLabelRect.origin.y -= moveHeight;
+        [_localLabel setFrame:localLabelRect];
+        
+        CGRect p2pButtonRect = _p2pButton.frame;
+        _p2pButtonYCoordinate = p2pButtonRect.origin.y;
+        p2pButtonRect.origin.y -= moveHeight;
+        [_p2pButton setFrame:p2pButtonRect];
+        
+        CGRect p2pLabelRect = _p2pLabel.frame;
+        _p2pLabelYCoordinate = p2pLabelRect.origin.y;
+        p2pLabelRect.origin.y -= moveHeight;
+        [_p2pLabel setFrame:p2pLabelRect];
+        
+        CGRect playButtonRect = _playButton.frame;
+        _playButtonYCoordinate = playButtonRect.origin.y;
+        playButtonRect.origin.y = _localButtonYCoordinate;
+        [_playButton setFrame:playButtonRect];
+        
+        CGRect playLabelRect = _playLabel.frame;
+        _playLabelYCoordinate = playLabelRect.origin.y;
+        playLabelRect.origin.y = _localLabelYCoordinate;
+        [_playLabel setFrame:playLabelRect];
+        
+        CGRect randomSegmentRect = _randomSegment.frame;
+        randomSegmentRect.origin.x = self.view.frame.size.width/2 - _randomSegment.frame.size.width/2;
+        [_randomSegment setFrame:randomSegmentRect];
+        
+        _cancelButtonXCoordinate = _cancelButton.frame.origin.x;
+        [_cancelButton animateToType:buttonBackType];
+        _cancelButton.tag = BACKTAG;
     }];
     
     [self displayGameOptions];

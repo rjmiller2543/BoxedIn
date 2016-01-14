@@ -52,6 +52,9 @@
     
     if ([PFFacebookUtils isLinkedWithUser:currUser]) {
         // Issue a Facebook Graph API request to get your user's friend list
+        FBSession *session = [[FBSession alloc] initWithPermissions:@[@"public_profile", @"user_friends"]];
+        [FBSession setActiveSession:session];
+        [FBSession openActiveSessionWithAllowLoginUI:NO fromViewController:self];
         [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
                 // result will contain an array with your user's friends in the "data" key
@@ -71,6 +74,7 @@
                 // with the current user
                 NSArray *friendUsers = [friendQuery findObjects];
                 [_dataSource addObjectsFromArray:friendUsers];
+                [_tableView reloadData];
             }
         }];
     }

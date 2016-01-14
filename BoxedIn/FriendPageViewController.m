@@ -34,6 +34,7 @@
 
 -(void)viewDidLayoutSubviews {
     NSArray *friendArray = [PFUser currentUser][@"friendsList"];
+    [_connectButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     if ([friendArray containsObject:_friendUser.objectId]) {
         _connectedToUser = true;
         _connectButton.titleLabel.text = @"Unfriend";
