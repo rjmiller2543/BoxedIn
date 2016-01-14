@@ -20,6 +20,7 @@
 #import <PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "MessagesViewController.h"
+#import <JFMinimalNotification.h>
 
 @interface AppDelegate ()
 
@@ -39,7 +40,7 @@
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
-    [Parse enableLocalDatastore];
+    //[Parse enableLocalDatastore];
     [Parse setApplicationId:@"aSJwZ9zYs5qmdb4KHc13UIbKvPB2bS0viHUGDKJW" clientKey:@"lPRPpHn5Vlglzd1vIYfGqwAsamhapHXJ6i8jGguW"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [PFFacebookUtils initializeFacebook];
@@ -122,13 +123,14 @@
     // Store the deviceToken in the current Installation and save it to Parse
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveInBackground];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [PFUser currentUser][@"installationId"] = currentInstallation.objectId;
+        [[PFUser currentUser] saveInBackground];
+    }];
     if (currentInstallation.badge != 0) {
         currentInstallation.badge = 0;
         [currentInstallation saveEventually];
     }
-    [PFUser currentUser][@"installationId"] = currentInstallation.objectId;
-    [[PFUser currentUser] saveInBackground];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -141,27 +143,66 @@
     
     if (application.applicationState == UIApplicationStateActive) {
         if ([[userInfo objectForKey:@"pushType"] isEqualToString:@"GameNotification"]) {
-            if ([self.window.rootViewController isKindOfClass:[GameBoardViewController class]]) {
-                GameBoardViewController *this = (GameBoardViewController*)self.window.rootViewController;
-                if ([this.game.objectId isEqualToString:[userInfo objectForKey:@"g"]]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGameNotification" object:[userInfo objectForKey:@"g"]];
-                }
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGameNotification" object:[userInfo objectForKey:@"g"]];
+            /*
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You're turn!" message:[userInfo valueForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 // up up
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInformation" object:[userInfo objectForKey:@"g"]];
             }]];
             [self.window.rootViewController presentViewController:alert animated:YES completion:^{
                 // up up
             }];
+             */
+            NSString *subtitle = [NSString stringWithFormat:@"Your friend %@ played their turn..", [userInfo objectForKey:@"fromUserName"]];
+            JFMinimalNotification *alert = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault title:@"You're Turn!" subTitle:subtitle dismissalDelay:3.0f touchHandler:^{
+                /*
+                NSString *objID = [userInfo objectForKey:@"g"];
+                PFObject *game = [PFObject objectWithoutDataWithClassName:@"GameBoard" objectId:objID];
+                
+                [game fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    if (!error) {
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        GameBoardViewController *gbvc = [storyboard instantiateViewControllerWithIdentifier:@"gameBoardViewController"];
+                        gbvc.game = object;
+                        [self.window.rootViewController presentViewController:gbvc animated:YES completion:^{
+                            //up up
+                        }];
+                    }
+                }];
+                 */
+                
+            }];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInformation" object:[userInfo objectForKey:@"g"]];
+            [alert setPresentFromTop:YES];
+            [self.window addSubview:alert];
+            [alert show];
         }
         else if ([[userInfo objectForKey:@"pushType"] isEqualToString:@"MessageNotification"]) {
+            JFMinimalNotification *alert = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault title:[userInfo objectForKey:@"fromUserName"] subTitle:[userInfo objectForKey:@"message"] dismissalDelay:3.0f touchHandler:^{
+                /*
+                PFQuery *query = [PFUser query];
+                [query getObjectInBackgroundWithId:[userInfo objectForKey:@"fromUserId"] block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    MessagesViewController *messageView = [[MessagesViewController alloc] init];
+                    PFUser *user = (PFUser *)object;
+                    messageView.oppUser = user;
+                    [self.window.rootViewController presentViewController:messageView animated:YES completion:^{
+                        //up up
+                    }];
+                }];
+                 */
+            }];
+            [alert setPresentFromTop:YES];
+            [self.window addSubview:alert];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateMessageNotification" object:userInfo];
+            [alert show];
+            
         }
     }
     else {
         //NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
         if ([userInfo objectForKey:@"g"] != nil) {
+            /*
             NSString *objID = [userInfo objectForKey:@"g"];
             PFObject *game = [PFObject objectWithoutDataWithClassName:@"GameBoard" objectId:objID];
             
@@ -175,9 +216,20 @@
                     }];
                 }
             }];
+             */
         }
         else if ([userInfo objectForKey:@"message"]) {
-           
+            /*
+            PFQuery *query = [PFUser query];
+            [query getObjectInBackgroundWithId:[userInfo objectForKey:@"fromUserId"] block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                MessagesViewController *messageView = [[MessagesViewController alloc] init];
+                PFUser *user = (PFUser *)object;
+                messageView.oppUser = user;
+                [self.window.rootViewController presentViewController:messageView animated:YES completion:^{
+                    //up up
+                }];
+            }];
+             */
         }
     }
     

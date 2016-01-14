@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JFMinimalNotifications.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JSQMessagesViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -122,6 +127,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>24B54FCE38CDD782DA17ACFA2AF7AC30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>26EDF1145FC391BA7361343AB0236E51</key>
 		<dict>
 			<key>primary</key>
@@ -132,17 +142,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4478978D9D0FDD473F9F850E951C4280</key>
+		<key>3506C05B5E214583AD47B3BEF8B07A89</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4521B7056618B1F53EAA0A4E2836F5AC</key>
+		<key>3958CA797331D3F7B01162F9CD6E01B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5366B7F679CF2BA31EA583EA35CA2D90</key>
+		<key>3C57667AFAEACDB15E9503BFA60F5E7D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4ABB5C3244D26C95528FF6879EC3B2FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,22 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6E754F6DFD2E4605CB8CBB14F73E5838</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6EDD569E2A798A978F3C4C08D1E68164</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7FFA9FE3D3B678610A541D4B9497FC41</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8B22964F01A227F1F6DBD0E56C403502</key>
+		<key>843AB80D46FED383BE8198EF73BD47AF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -193,6 +193,16 @@
 			<true/>
 		</dict>
 		<key>9A7B3EC56C791BE78C1EFE569A1CEA3A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B916844F33E8D3CF7BC18CE424E9721</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9E8316A4D19EEE58F8E1D9E2A8288BE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -212,7 +222,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BAA7EF4D77CFAE58C959E09DC4A38C71</key>
+		<key>D1507F3B7A5346358393E0A5D7F601E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

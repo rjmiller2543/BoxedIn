@@ -28,13 +28,16 @@
     [self setAutomaticallyScrollsToMostRecentMessage:YES];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closePressed:)];
     
-    self.senderId = [[PFUser currentUser] username];
-    self.senderDisplayName = [[PFUser currentUser] username];
+    PFUser *me = [PFUser currentUser];
+    self.senderId = [me username];
+    self.senderDisplayName = [me username];
     
     _messageData = [[NSMutableArray alloc] init];
     _messages = [[NSMutableArray alloc] init];
     //NSPredicate *currpredicate = [NSPredicate predicateWithFormat:@"(FromUser = %@ OR ToUser = %@) AND (FromUser = %@ OR ToUser = %@", [PFUser currentUser], [PFUser currentUser], _oppUser, _oppUser];
-    NSPredicate *currpredicate = [NSPredicate predicateWithFormat:@"(FromUser = %@ OR ToUser = %@) AND (FromUser = %@ OR ToUser = %@)", [PFUser currentUser], [PFUser currentUser], _oppUser, _oppUser];
+    NSPredicate *mePredicate = [NSPredicate predicateWithFormat:@"FromUser = %@ OR ToUser = %@", me, me];
+    NSPredicate *youPredicate = [NSPredicate predicateWithFormat:@"FromUser = %@ OR ToUser = %@", _oppUser, _oppUser];
+    NSPredicate *currpredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[youPredicate, mePredicate]];
     PFQuery *query = [PFQuery queryWithClassName:@"Message" predicate:currpredicate];
     [query orderByAscending:@"createdAt"];
     [query setLimit:30];
@@ -56,8 +59,11 @@
 }
 
 -(void)updateMessages {
-    NSPredicate *currPredicate = [NSPredicate predicateWithFormat:@"(FromUser = %@ AND ToUser = %@) AND (createdAt > %@)", _oppUser, [PFUser currentUser], _lastQuery];
-    PFQuery *query = [PFQuery queryWithClassName:@"Message" predicate:currPredicate];
+    PFUser *me = [PFUser currentUser];
+    NSPredicate *mePredicate = [NSPredicate predicateWithFormat:@"FromUser = %@ OR ToUser = %@", me, me];
+    NSPredicate *youPredicate = [NSPredicate predicateWithFormat:@"FromUser = %@ OR ToUser = %@", _oppUser, _oppUser];
+    NSPredicate *currpredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[youPredicate, mePredicate]];
+    PFQuery *query = [PFQuery queryWithClassName:@"Message" predicate:currpredicate];
     [query orderByDescending:@"createdAt"];
     [query setLimit:30];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -78,7 +84,27 @@
 }
 
 -(void)updateData {
-    
+    PFUser *me = [PFUser currentUser];
+    NSPredicate *mePredicate = [NSPredicate predicateWithFormat:@"FromUser = %@ OR ToUser = %@", me, me];
+    NSPredicate *youPredicate = [NSPredicate predicateWithFormat:@"FromUser = %@ OR ToUser = %@", _oppUser, _oppUser];
+    NSPredicate *currpredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[youPredicate, mePredicate]];
+    PFQuery *query = [PFQuery queryWithClassName:@"Message" predicate:currpredicate];
+    [query orderByAscending:@"createdAt"];
+    [query setLimit:30];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        [_messageData addObjectsFromArray:objects];
+        for (PFObject *message in _messageData) {
+            NSDate *date = message.createdAt;
+            PFUser *from = message[@"FromUser"];
+            [from fetch];
+            NSString *messageString = message[@"message"];
+            JSQMessage *newMessage = [[JSQMessage alloc] initWithSenderId:[from username] senderDisplayName:[from username] date:date text:messageString];
+            [_messages addObject:newMessage];
+        }
+        [self.collectionView reloadData];
+        
+        [self scrollToBottomAnimated:YES];
+    }];
 }
 
 - (void)closePressed:(UIBarButtonItem *)sender
@@ -88,6 +114,8 @@
 
 -(void)setOppUser:(PFUser *)oppUser {
     _oppUser = oppUser;
+    self.title = _oppUser.username;
+    [self updateData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,9 +149,10 @@
     
     [self finishSendingMessageAnimated:YES];
     
+    PFUser *me = [PFUser currentUser];
     PFObject *pfMessage = [PFObject objectWithClassName:@"Message"];
     //pfMessage[@"FromUser"] = [PFUser currentUser];
-    [pfMessage setObject:[PFUser currentUser] forKey:@"FromUser"];
+    [pfMessage setObject:me forKey:@"FromUser"];
     //pfMessage[@"ToUser"] = _oppUser;
     [pfMessage setObject:_oppUser forKey:@"ToUser"];
     //pfMessage[@"message"] = text;
@@ -141,7 +170,7 @@
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery]; // Set our Installation query
     
-    NSString *pushMessage = [PFUser currentUser].username;
+    NSString *pushMessage = me.username;
     pushMessage = [pushMessage stringByAppendingString:@": "];
     pushMessage = [pushMessage stringByAppendingString:text];
     NSDictionary *data = @{
@@ -149,7 +178,9 @@
                            @"pushType" : @"MessageNotification",
                            //@"g" : _game.objectId,
                            @"badge" : @"Increment",
-                           @"sounds" : @"default"
+                           @"sounds" : @"default",
+                           @"fromUserName" : me.username,
+                           @"fromUserId" : me.objectId
                            };
     
     [push setData:data];

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0728F68E36D7FD309593C66E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F2DC43E27BC668991726707 /* libPods.a */; };
+		501560351C46EB1D0016F4B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501560341C46EB1D0016F4B1 /* SystemConfiguration.framework */; };
 		506B2AD61BEA455400F96268 /* create-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 506B2AD51BEA455400F96268 /* create-button.png */; };
 		506B2AD91BEBB5A600F96268 /* FriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2AD81BEBB5A600F96268 /* FriendListViewController.m */; };
 		506B2ADD1BEBB5D100F96268 /* InfoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B2ADC1BEBB5D100F96268 /* InfoPageViewController.m */; };
@@ -83,6 +84,7 @@
 
 /* Begin PBXFileReference section */
 		0444D99D7AF0FA727301C6DB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		501560341C46EB1D0016F4B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		506B2AD51BEA455400F96268 /* create-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create-button.png"; sourceTree = "<group>"; };
 		506B2AD71BEBB5A600F96268 /* FriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListViewController.h; sourceTree = "<group>"; };
 		506B2AD81BEBB5A600F96268 /* FriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListViewController.m; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				501560351C46EB1D0016F4B1 /* SystemConfiguration.framework in Frameworks */,
 				50F1BAC41C3AC58700E6FC21 /* iAd.framework in Frameworks */,
 				506B2B501BFC113200F96268 /* MultipeerConnectivity.framework in Frameworks */,
 				50CB69E81C3C478200D3DE62 /* StoreKit.framework in Frameworks */,
@@ -367,6 +370,7 @@
 		5C2D848774B953A96F3EFE17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				501560341C46EB1D0016F4B1 /* SystemConfiguration.framework */,
 				50CB69E71C3C478200D3DE62 /* StoreKit.framework */,
 				50F1BAC31C3AC58700E6FC21 /* iAd.framework */,
 				506B2B4F1BFC113200F96268 /* MultipeerConnectivity.framework */,

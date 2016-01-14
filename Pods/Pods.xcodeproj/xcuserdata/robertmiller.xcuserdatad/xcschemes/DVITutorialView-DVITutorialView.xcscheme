@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '579EA35622E1ECACAFD99C5D'
+               BlueprintIdentifier = 'ECC1C78D86507BD7DAEEE620'
                BlueprintName = 'DVITutorialView-DVITutorialView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'DVITutorialView.bundle'>

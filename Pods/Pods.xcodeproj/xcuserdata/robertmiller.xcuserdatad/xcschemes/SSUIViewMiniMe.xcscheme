@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '76A1AD6225BA45F66B3A12D7'
+               BlueprintIdentifier = '920F8A461B4EC267FA74B58F'
                BlueprintName = 'SSUIViewMiniMe'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libSSUIViewMiniMe.a'>

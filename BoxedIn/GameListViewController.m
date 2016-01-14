@@ -17,6 +17,7 @@
 
 @property(nonatomic,retain) NSMutableArray *currentGamesArray;
 @property(nonatomic,retain) NSMutableArray *previousGamesArray;
+@property(nonatomic,retain) NSDate *lastSearchDate;
 
 @end
 
@@ -40,24 +41,30 @@
     //[_tableView registerClass:[GameCell class] forCellReuseIdentifier:@"GameCell"];
     PFUser *user = [PFUser currentUser];
     if (user != nil) {
-        NSPredicate *currpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = 0", user, user];
+        NSPredicate *currpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = NO", user, user];
         PFQuery *currquery = [PFQuery queryWithClassName:@"GameBoard" predicate:currpredicate];
         [currquery orderByDescending:@"updatedAt"];
+        //[currquery setCachePolicy:kPFCachePolicyNetworkElseCache];
         [currquery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             [_currentGamesArray removeAllObjects];
             [_currentGamesArray addObjectsFromArray:objects];
+            [PFObject unpinAllInBackground:_currentGamesArray];
+            [PFObject unpinAllInBackground:objects];
+            [_tableView reloadData];
         }];
         
-        NSPredicate *prevpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = 1", user, user];
+        NSPredicate *prevpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = YES", user, user];
         PFQuery *prevquery = [PFQuery queryWithClassName:@"GameBoard" predicate:prevpredicate];
         [prevquery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             [_previousGamesArray removeAllObjects];
             [_previousGamesArray addObjectsFromArray:objects];
+            [_tableView reloadData];
         }];
+        _lastSearchDate = [NSDate date];
     }
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:180.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
-    [timer fire];
+    //NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:180.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    //[timer fire];
     
     /*
     PFQuery *query = [PFQuery queryWithClassName:@"GameBoard"];
@@ -113,17 +120,58 @@
 -(void)refreshData {
     PFUser *user = [PFUser currentUser];
     if (user != nil) {
-        NSPredicate *currpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = NO", user, user];
+        NSPredicate *playerPredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = NO", user, user];
+        NSPredicate *datePredicate = [NSPredicate predicateWithFormat:@"updatedAt > %@", _lastSearchDate];
+        NSPredicate *currpredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[playerPredicate, datePredicate]];
         PFQuery *currquery = [PFQuery queryWithClassName:@"GameBoard" predicate:currpredicate];
         [currquery orderByDescending:@"updatedAt"];
+        //[currquery setCachePolicy:kPFCachePolicyNetworkElseCache];
+        [currquery clearCachedResult];
+        [PFQuery clearAllCachedResults];
+        
         [currquery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             NSLog(@"finished finding curr games");
             if (error) {
                 NSLog(@"Error finding curr games with error: %@", error);
             }
-            [_currentGamesArray removeAllObjects];
-            [_currentGamesArray addObjectsFromArray:objects];
+            PFObject *removalObject;
+            BOOL remove = false;
+            for (PFObject *new in objects) {
+                NSLog(@"new update at: %@", new.updatedAt);
+                for (PFObject *last in _currentGamesArray) {
+                    if ([new.objectId isEqualToString:last.objectId]) {
+                        remove = true;
+                        removalObject = last;
+                        break;
+                    }
+                }
+                if (remove) {
+                    [_currentGamesArray removeObject:removalObject];
+                    remove = false;
+                    [new fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                        NSLog(@"done with fetch, updated at: %@",object.updatedAt);
+                        [_tableView reloadData];
+                    }];
+                }
+            }
+ 
+            //[_currentGamesArray removeAllObjects];
+            //[_currentGamesArray addObjectsFromArray:objects];
+            //[PFObject unpinAllInBackground:_currentGamesArray];
+            //[PFObject unpinAllInBackground:objects];
+            [_currentGamesArray insertObjects:objects atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, objects.count)]];
             [_tableView reloadData];
+            _lastSearchDate = [NSDate date];
+            [_tableView.pullToRefreshView stopAnimating];
+            /*[PFObject unpinAll:_currentGamesArray];
+            [PFObject fetchAllInBackground:_currentGamesArray block:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                NSLog(@"done fetching current games");
+                //[PFObject pinAllInBackground:_currentGamesArray];
+                [_tableView reloadData];
+                _lastSearchDate = [NSDate date];
+                [_tableView.pullToRefreshView stopAnimating];
+            }];
+            */
         }];
         
         NSPredicate *prevpredicate = [NSPredicate predicateWithFormat:@"(PlayerOne = %@ OR PlayerTwo = %@) AND completed = YES", user, user];
@@ -132,7 +180,6 @@
             [_previousGamesArray removeAllObjects];
             [_previousGamesArray addObjectsFromArray:objects];
             [_tableView reloadData];
-            [_tableView.pullToRefreshView stopAnimating];
         }];
     }
 }
@@ -262,8 +309,11 @@
 
 -(void)receiveNotification:(NSNotification*)notification {
     if ([[notification name] isEqualToString:@"UpdateUserInformation"]) {
-        [[PFUser currentUser] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        //[[PFUser currentUser] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
             //up up
+            //[self refreshData];
+        //}];
+        [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
             [self refreshData];
         }];
     }

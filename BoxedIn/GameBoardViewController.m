@@ -79,9 +79,24 @@
     [UIViewController prepareInterstitialAds];
     
     [SVProgressHUD showWithStatus:@"Updating Game Board.."];
-    [_game fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        [self updateDataPoints];
-    }];
+    //[_game fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    //    [self updateDataPoints];
+    //}];
+    //[_game fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    //    _game = object;
+    //    [self updateDataPoints];
+    //}];
+    //PFQuery *query = [PFQuery queryWithClassName:@"GameBoard"];
+    //[query whereKey:@"objectId" equalTo:_game.objectId];
+    //[query getObjectInBackgroundWithId:_game.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    //    _game = object;
+    //    [self updateDataPoints];
+    //}];
+    //[_game unpin];
+    //[_game fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    //    _game = object;
+    //    [self updateDataPoints];
+    //}];
     
     [self.navigationController.navigationBar configureFlatNavigationBarWithColor:BIGreen];
     BOOL goodArray = true;
@@ -364,6 +379,10 @@
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [SVProgressHUD dismiss];
+}
+
 -(void)startTutorial {
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"FirstTimeGameBoard"] boolValue] == false) {
         if (!_tutorialComplete) {
@@ -633,7 +652,7 @@
         _playerOneTurn = true;
     }
     else {
-        _playerOneTurn = _game[@"playerOneTurn"];
+        _playerOneTurn = [_game[@"playerOneTurn"] boolValue];
     }
     
     _playBoxButton = [[VBFPopFlatButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - 15, self.view.frame.size.height - 45, 30, 30) buttonType:buttonCloseType buttonStyle:buttonRoundedStyle animateToInitialState:YES];
@@ -651,11 +670,13 @@
 }
 
 -(void)updateDataPoints {
-    //[SVProgressHUD showWithStatus:@"Updating Game Board.."];
+    
+    [SVProgressHUD showWithStatus:@"Updating Game Board.."];
     
     int rows = [_game[@"NumberRows"] intValue];
     int cols = [_game[@"NumberCols"] intValue];
     
+    //[_game[@"coordinates"] fetch];
     PFFile *file = _game[@"coordinates"];
     NSData *cData = [file getData];
     _coordinates = [NSKeyedUnarchiver unarchiveObjectWithData:cData];
@@ -720,6 +741,7 @@
     }
     
     @try {
+        //[_game[@"PlayerOneBoxes"] fetch];
         PFFile *file = _game[@"PlayerOneBoxes"];
         NSData *p1Data = [file getData];
         _playerOneBoxes = [NSKeyedUnarchiver unarchiveObjectWithData:p1Data];
@@ -732,6 +754,7 @@
     }
     
     @try {
+        //[_game[@"PlayerTwoBoxes"] fetch];
         PFFile *file = _game[@"PlayerTwoBoxes"];
         NSData *p2Data = [file getData];
         _playerTwoBoxes = [NSKeyedUnarchiver unarchiveObjectWithData:p2Data];
@@ -761,6 +784,7 @@
         _playerOneTurn = [_game[@"playerOneTurn"] boolValue];
     }
     [self updatePlayerTurnViews];
+    [SVProgressHUD dismiss];
     [SVProgressHUD dismiss];
 }
 
@@ -856,10 +880,11 @@
     int box = 0;
     
     BOOL myTurn;
-    if ((_playerOneTurn == true) && [[PFUser currentUser] isEqual:_game[@"PlayerOne"]]) {
+    PFUser *user = [PFUser currentUser];
+    if ((_playerOneTurn == true) && [user.objectId isEqualToString:[_game[@"PlayerOne"] objectId]]) {
         myTurn = YES;
     }
-    else if ((_playerOneTurn == false) && [[PFUser currentUser] isEqual:_game[@"PlayerTwo"]]) {
+    else if ((_playerOneTurn == false) && [user.objectId isEqualToString:[_game[@"PlayerTwo"] objectId]]) {
         myTurn = YES;
     }
     else
@@ -1258,7 +1283,8 @@
                                        @"pushType" : @"GameNotification",
                                        @"g" : _game.objectId,
                                        @"badge" : @"Increment",
-                                       @"sounds" : @"default"
+                                       @"sounds" : @"default",
+                                       @"fromUserName" : senderUser.username
                                        };
                 
                 [push setData:data];
@@ -1389,9 +1415,15 @@
 -(void)receiveNotification:(NSNotification*)notification {
     if ([[notification name] isEqualToString:@"UpdateGameNotification"]) {
         NSLog(@"game received notification");
-        [_game fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            [self updateDataPoints];
-        }];
+        if ([[notification object] isEqualToString:_game.objectId]) {
+            //PFQuery *query = [PFQuery queryWithClassName:@"GameBoard"];
+            //[query whereKey:@"objectId" equalTo:[notification object]];
+            [_game unpin];
+            [_game fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                _game = object;
+                [self updateDataPoints];
+            }];
+        }
     }
     if ([[notification name] isEqualToString:@"UpdateUserInformation"]) {
         [[PFUser currentUser] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
@@ -1408,7 +1440,7 @@
     
     if (_gameType != LOCALTYPE) {
         MessagesViewController *messageViewController = [[MessagesViewController alloc] init];
-        if ([_game[@"PlayerOne"] isEqual:[PFUser currentUser]]) {
+        if ([[_game[@"PlayerOne"] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
             [messageViewController setOppUser:_game[@"PlayerTwo"]];
         }
         else {

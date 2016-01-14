@@ -1,10 +1,10 @@
 PODS:
-  - Bolts (1.3.0):
-    - Bolts/AppLinks (= 1.3.0)
-    - Bolts/Tasks (= 1.3.0)
-  - Bolts/AppLinks (1.3.0):
+  - Bolts (1.5.1):
+    - Bolts/AppLinks (= 1.5.1)
+    - Bolts/Tasks (= 1.5.1)
+  - Bolts/AppLinks (1.5.1):
     - Bolts/Tasks
-  - Bolts/Tasks (1.3.0)
+  - Bolts/Tasks (1.5.1)
   - DVITutorialView (0.2.2)
   - Facebook-iOS-SDK (3.24.1):
     - Bolts (~> 1.2)
@@ -22,6 +22,7 @@ PODS:
   - FBSDKShareKit (4.1.0):
     - FBSDKCoreKit
   - FlatUIKit (1.6.2)
+  - JFMinimalNotifications (0.0.6)
   - JSQMessagesViewController (7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -32,10 +33,10 @@ PODS:
     - MZFormSheetController/Core (= 3.1.3)
   - MZFormSheetController/Core (3.1.3):
     - MZAppearance
-  - Parse (1.9.0):
-    - Bolts/Tasks (>= 1.3.0)
-  - ParseFacebookUtils (1.9.0):
-    - Bolts/Tasks (>= 1.3.0)
+  - Parse (1.12.0):
+    - Bolts/Tasks (~> 1.5)
+  - ParseFacebookUtils (1.10.0):
+    - Bolts/Tasks (~> 1.5)
     - Facebook-iOS-SDK (~> 3.24)
     - Parse (~> 1.9)
   - pop (1.0.8)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.1.0)
   - FBSDKShareKit (~> 4.1.0)
   - FlatUIKit
+  - JFMinimalNotifications
   - JSQMessagesViewController
   - MinimalTabBar
   - MZFormSheetController
@@ -64,20 +66,21 @@ DEPENDENCIES:
   - VBFPopFlatButton
 
 SPEC CHECKSUMS:
-  Bolts: 805a4a87413e49d4a0c2b7d469084cbc46b09342
+  Bolts: a12663244b1d3351c738882e71902fc74db54f64
   DVITutorialView: 7b933723d5ec27ecb4aed6f67f3706e362e9385c
   Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
   FBSDKCoreKit: 84b3616a361801f190e43a9909caead7bb6087c7
   FBSDKLoginKit: ff6224762732e3698f30942e4544321b8c7a23e6
   FBSDKShareKit: 8002faf0c564ff3625eadd16e506b0b0fbf3adef
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
+  JFMinimalNotifications: 54416d50c609b591d2627edcd683d5195f2cb2a3
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   MinimalTabBar: 39891cc6b67fcd7ac491ca1049f0b0b94ea5e6f6
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetController: da2df509805d757e04b052915057d8e1a338b050
-  Parse: 712efbc476d4f47b0f96b70db7e53101575753aa
-  ParseFacebookUtils: 5e8cecf2b352f50a6780ba41c9268359032d686f
+  Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
+  ParseFacebookUtils: 7030f53c989fda36ad50029d90edec1327424317
   pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
   SSUIViewMiniMe: 1bb47a90664737e32d671ca0fbb8e28a3e4f1720
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1

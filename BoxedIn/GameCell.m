@@ -23,24 +23,29 @@
     PFUser *playerOne = _game[@"PlayerOne"];
     PFUser *playerTwo = _game[@"PlayerTwo"];
     
+    //[playerOne fetch];
+    //[playerTwo fetch];
+    
+    //[_game fetch];
+    
     if ([playerOne isEqual:user]) {
         if ([_game[@"playerOneTurn"] boolValue]) {
             _meLabel.textColor = BIPurple;
             _meScore.textColor = BIPurple;
             _youLabel.textColor = BILightGrey;
             _youScore.textColor = BILightGrey;
-            const unichar firstLetterChar = [_meLabel.text characterAtIndex:1];
-            NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
-            [_youLetterView setImageWithString:firstLetterString color:BIPurple circular:NO];
+            //const unichar firstLetterChar = [playerTwo.username characterAtIndex:1];
+            //NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
+            //[_youLetterView setImageWithString:firstLetterString color:BIPurple circular:NO];
         }
         else {
             _meLabel.textColor = BILightGrey;
             _meScore.textColor = BILightGrey;
             _youLabel.textColor = BIPurple;
             _youScore.textColor = BIPurple;
-            const unichar firstLetterChar = [_youLabel.text characterAtIndex:1];
-            NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
-            [_youLetterView setImageWithString:firstLetterString color:BILightGrey circular:NO];
+            //const unichar firstLetterChar = [playerOne.username characterAtIndex:1];
+            //NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
+            //[_youLetterView setImageWithString:firstLetterString color:BILightGrey circular:NO];
         }
         NSString *meLabelText = @"@";
         if (playerOne == nil) {
@@ -92,18 +97,18 @@
             _meScore.textColor = BILightGrey;
             _youLabel.textColor = BIPurple;
             _youScore.textColor = BIPurple;
-            const unichar firstLetterChar = [_youLabel.text characterAtIndex:1];
-            NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
-            [_youLetterView setImageWithString:firstLetterString color:BILightGrey circular:NO];
+            //const unichar firstLetterChar = [playerTwo.username characterAtIndex:1];
+            //NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
+            //[_youLetterView setImageWithString:firstLetterString color:BILightGrey circular:NO];
         }
         else {
             _meLabel.textColor = BIPurple;
             _meScore.textColor = BIPurple;
             _youLabel.textColor = BILightGrey;
             _youScore.textColor = BILightGrey;
-            const unichar firstLetterChar = [_meLabel.text characterAtIndex:1];
-            NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
-            [_youLetterView setImageWithString:firstLetterString color:BIPurple circular:NO];
+            //const unichar firstLetterChar = [playerOne.username characterAtIndex:1];
+            //NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
+            //[_youLetterView setImageWithString:firstLetterString color:BIPurple circular:NO];
         }
         NSString *meLabelText = @"@";
         if (playerTwo == nil) {
@@ -145,7 +150,9 @@
         NSArray *playerOneBoxes = [NSKeyedUnarchiver unarchiveObjectWithData:twoData];
         _youScore.text = [[NSNumber numberWithUnsignedInteger:playerOneBoxes.count] stringValue];
         
-        
+        const unichar firstLetterChar = [_youLabel.text characterAtIndex:1];
+        NSString *firstLetterString = [NSString stringWithCharacters:&firstLetterChar length:1];
+        [_youLetterView setImageWithString:firstLetterString color:BILightGrey circular:NO];
     }
 }
 

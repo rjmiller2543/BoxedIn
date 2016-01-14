@@ -478,6 +478,7 @@
     [_localButton setEnabled:YES];
     [_p2pButton setEnabled:YES];
     [_playButton setEnabled:YES];
+    [SVProgressHUD dismiss];
     
     [[PFUser currentUser] setObject:@NO forKey:@"random"];
     [[PFUser currentUser] saveInBackground];

@@ -13,6 +13,7 @@
 #import <Parse.h>
 #import "BoxedInColors.h"
 #import "AppDelegate.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 @interface LoginViewController () <FUIAlertViewDelegate, UITextFieldDelegate>
 
@@ -25,6 +26,32 @@
     // Do any additional setup after loading the view.
     _userNameTextField.delegate = self;
     _passwordTextField.delegate = self;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (![self isNetworkAvailable]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Network Unavailable!" message:@"It seems there's an issue with your network connection which is necessary to sign up for BoxedIn.." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //do nothing
+        }]];
+        [self presentViewController:alert animated:YES completion:^{
+            //up up
+        }];
+    }
+}
+
+-(BOOL)isNetworkAvailable {
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityRef address;
+    address = SCNetworkReachabilityCreateWithName(NULL, "www.google.com");
+    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
+    CFRelease(address);
+    
+    bool canReach = success
+                    && !(flags & kSCNetworkReachabilityFlagsConnectionRequired)
+                    && (flags & kSCNetworkReachabilityFlagsReachable);
+    
+    return canReach;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,6 +72,16 @@
     // Set permissions required from the facebook user account
     
     NSString *userName = [_userNameTextField text];
+    if ([userName isEqualToString:@""]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You need a username!" message:@"Enter a username to play, we will not track, we will not sell, we will do absolutely nothing with your data but allow you to play your friends.." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //up up
+        }]];
+        [self presentViewController:alert animated:YES completion:^{
+            //upup
+        }];
+        return;
+    }
     if ([userName characterAtIndex:0] ) {
         NSRange textfieldfirstText = [userName rangeOfComposedCharacterSequenceAtIndex:0];
         NSRange textfieldmatchText = [userName rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet] options:0 range:textfieldfirstText];
@@ -98,6 +135,16 @@
 -(void)passwordButtonPressed:(id)sender {
     
     NSString *userName = [_userNameTextField text];
+    if ([userName isEqualToString:@""]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You need a username!" message:@"Enter a username to play, we will not track, we will not sell, we will do absolutely nothing with your data but allow you to play your friends.." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //up up
+        }]];
+        [self presentViewController:alert animated:YES completion:^{
+            //upup
+        }];
+        return;
+    }
     if ([userName characterAtIndex:0] ) {
         NSRange textfieldfirstText = [userName rangeOfComposedCharacterSequenceAtIndex:0];
         NSRange textfieldmatchText = [userName rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet] options:0 range:textfieldfirstText];
